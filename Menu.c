@@ -82,11 +82,17 @@ void data_menu() {
 		if (move(&select)) {
 			switch (select) {
 			case 0:
-				List* New_Data = new_persons(); //TODO: FIX
+				List* new_Data = new_persons(); //TODO: FIX
+				Data = *new_Data;
+				free(new_Data->arr);
+				free(new_Data);
 			//case 1:
 			//	//del_persons(); 
-			//case 2:
-			//	//save_data();
+			case 2:
+				if (save_data(&Data))
+					printf("\n\nОшибка сохранения!\n\n");
+				else
+					printf("\n\nУспешное сохранение\n\n");
 			case 5:
 				flag = 0;
 			}

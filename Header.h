@@ -41,6 +41,7 @@ enum Menu {
 };
 
 
+// Функции меню
 void menu(int select, enum Menu page);
 void edit_menu(Student* person);
 void exit_menu(void);
@@ -50,6 +51,7 @@ void drop_menu(void);
 int move(int* select);
 
 
+// Функции вывода
 List* new_persons(void);
 void print_List(List* persons);
 void print_Person(Student* persons);
@@ -65,6 +67,11 @@ void edit_Rate(Student* person, int flag);
 void init_group(Student* person);
 
 
+// Функции работы с файлами
+int save_data(List* data);
+int load_data(void);
 
+
+// Глобальные переменные
 extern int menu_size;
 extern List Data;

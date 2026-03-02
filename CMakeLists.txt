@@ -12,7 +12,7 @@ endif()
 project ("DataBase")
 
 # Добавьте источник в исполняемый файл этого проекта.
-add_executable (DataBase "main.c"  "Header.h" "Functions.c"   "Edit.c" "Menu.c")
+add_executable (DataBase "main.c"  "Header.h" "Functions.c"   "Edit.c" "Menu.c" "FilesFunc.c")
 
 if (CMAKE_VERSION VERSION_GREATER 3.12)
   set_property(TARGET DataBase PROPERTY CXX_STANDARD 20)
