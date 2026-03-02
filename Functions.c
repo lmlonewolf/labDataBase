@@ -3,18 +3,18 @@
 
 
 
-List new_persons() {
+List* new_persons() {
 	system("cls");
 	printf("Введите необходимое число строк для добавления: ");
 	ui size;
 	if (scanf_s("%d", &size) == 0) {
 		printf("\nПроизошла ошибка(\nПопробуйте ещё раз\n");
-		return (List) { NULL, NULL };
+		return NULL;
 	}
 	Student* arr = calloc(size, sizeof(Student)); // Создать массив студентов нужного размера
 	if (arr == NULL) {
 		printf("\nНе удалось выделить память");
-		return (List) { NULL, NULL };
+		return NULL;
 	}
 	for (int i = 0; i < size; i++) {
 		init_person(&arr[i], i + 1);
@@ -22,9 +22,10 @@ List new_persons() {
 		system("pause");
 	}
 	system("cls");
-	List temp = { arr, size };
-	print_List(&temp);
-	return temp;
+	List* ptr = calloc(1, sizeof(List));
+	*ptr = (List) { arr, size };
+	print_List(ptr);
+	return ptr;
 }
 
 

@@ -47,9 +47,10 @@ void exit_menu(void);
 void start_menu(void);
 void data_menu(void);
 void drop_menu(void);
+int move(int* select);
 
 
-List new_persons(void);
+List* new_persons(void);
 void print_List(List* persons);
 void print_Person(Student* persons);
 
@@ -62,6 +63,7 @@ void edit_Group(Student* person, int flag);
 void edit_Modul(Student* person, us num, int flag);
 void edit_Rate(Student* person, int flag);
 void init_group(Student* person);
+
 
 
 extern int menu_size;

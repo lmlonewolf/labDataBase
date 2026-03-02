@@ -49,18 +49,10 @@ void menu(int select, enum Menu page) {
 
 void start_menu() {
 	int select = 0;
-	int key;
+	
 	while (1) {
 		menu(select, Start);
-		key = _getch();
-		if (key == 224) { // Начало ввода с клавиатуры
-			key = _getch();
-			if (key == 72) // Вверх
-				select = (select > 0) ? select - 1 : menu_size - 1;
-			if (key == 80) // Вниз
-				select = (select < menu_size - 1) ? select + 1 : 0;
-		}
-		else if (key == 13) { // Enter
+		if (move(&select)) { // Enter
 			switch (select) {
 				case 0:
 					data_menu();
@@ -83,22 +75,14 @@ void start_menu() {
 
 void data_menu() {
 	int select = 0;
-	int key;
+	
 	int flag = 1;
 	while (flag) {
 		menu(select, DataOptions);
-		key = _getch();
-		if (key == 224) { // Начало ввода с клавиатуры
-			key = _getch();
-			if (key == 72) // Вверх
-				select = (select > 0) ? select - 1 : menu_size - 1;
-			if (key == 80) // Вниз
-				select = (select < menu_size - 1) ? select + 1 : 0;
-		}
-		else if (key == 13) { // Enter
+		if (move(&select)) {
 			switch (select) {
 			case 0:
-				List New_Data = new_persons(); //TODO: FIX
+				List* New_Data = new_persons(); //TODO: FIX
 			//case 1:
 			//	//del_persons(); 
 			//case 2:
@@ -113,18 +97,9 @@ void data_menu() {
 
 void exit_menu() {
 	int select = 0;
-	int key;
 	while (1) {
 		menu(select, Exit);
-		key = _getch();
-		if (key == 224) { // Начало ввода с клавиатуры
-			key = _getch();
-			if (key == 72) // Вверх
-				select = (select > 0) ? select - 1 : menu_size - 1;
-			if (key == 80) // Вниз
-				select = (select < menu_size - 1) ? select + 1 : 0;
-		}
-		else if (key == 13) { // Enter
+		if (move(&select)) { // Управление
 			if (select == 0) {
 				break;
 			}
@@ -138,18 +113,10 @@ void exit_menu() {
 
 void drop_menu() {
 	int select = 0;
-	int key;
+	
 	while (1) {
 		menu(select, Drop);
-		key = _getch();
-		if (key == 224) { // Начало ввода с клавиатуры
-			key = _getch();
-			if (key == 72) // Вверх
-				select = (select > 0) ? select - 1 : menu_size - 1;
-			if (key == 80) // Вниз
-				select = (select < menu_size - 1) ? select + 1 : 0;
-		}
-		else if (key == 13) { // Enter
+		if (move(&select)) { // Управление
 			if (select == 0) {
 				break;
 			}
@@ -165,21 +132,12 @@ void drop_menu() {
 
 void edit_menu(Student* person) {
 	int select = 0;
-	int key;
 	int flag = 1;
 	while (flag) {
 		print_Person(person); // Вывод заголовка
 		printf("\nВыберете пункты для изменения:\n\n");
 		menu(select, Edit);
-		key = _getch();
-		if (key == 224) { // Начало ввода с клавиатуры
-			key = _getch();
-			if (key == 72) // Вверх
-				select = (select > 0) ? select - 1 : menu_size - 1;
-			if (key == 80) // Вниз
-				select = (select < menu_size - 1) ? select + 1 : 0;
-		}
-		else if (key == 13) { // Enter
+		if(move(&select)) { //Управление
 			switch (select) { // TODO: Добавить изменение по пунктам
 			//case 0:
 			//case 1:
@@ -194,4 +152,20 @@ void edit_menu(Student* person) {
 			}
 		}
 	}
+}
+
+
+int move(int* select) {
+	int key = _getch();
+	if (key == 224) { // Начало ввода с клавиатуры
+		key = _getch();
+		if (key == 72) // Вверх
+			*select = (*select > 0) ? *select - 1 : menu_size - 1;
+		if (key == 80) // Вниз
+			*select = (*select < menu_size - 1) ? *select + 1 : 0;
+		return 0;
+	}
+	else if (key == 13)
+		return 1;
+	return 0;
 }
