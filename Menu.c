@@ -87,7 +87,7 @@ void data_menu() {
 			//case 1:
 			//	//del_persons(); 
 			case 2:
-				if (save_data(&Data))
+				if (save_data())
 					printf("\n\nОшибка сохранения!\n\n");
 				else
 					printf("\n\nУспешное сохранение\n\n");

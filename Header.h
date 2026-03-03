@@ -51,13 +51,11 @@ int move(int* select);
 
 
 // Функции вывода
-List* new_persons(void);
 void print_List(List* persons);
 void print_Person(Student* persons);
 
 
 // Функции именения полей
-int init_person(Student* person, int num);
 void edit_ID(Student* person, int flag);
 void edit_Name(Student* person, int flag);
 void edit_Group(Student* person, int flag);
@@ -66,11 +64,17 @@ void edit_Rate(Student* person, int flag);
 void init_group(Student* person);
 
 
-// Функции работы с данными
-int save_data();
-int load_data(void);
+// Функции с данными
+List* new_persons(void);
+int init_person(Student* person, int num);
 List* sum_lists(List* first, List* second);
 void drop_data(void);
+
+
+// Функции работы с файлами
+int save_data(void);
+int load_data(void);
+
 
 
 // Глобальные переменные
