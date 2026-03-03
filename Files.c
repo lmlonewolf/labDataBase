@@ -1,11 +1,11 @@
 #include "Header.h"
 #include <IO.h>
 
-int save_data(List* ptr) {
+int save_data(void) {
 	FILE* file = fopen("data.dat", "wb");
-	int res = fwrite(ptr->arr, sizeof(Student), ptr->size, file);
+	int res = fwrite(Data->arr, sizeof(Student), Data->size, file);
 	fclose(file);
-	if (res != ptr->size)
+	if (res != Data->size)
 		return 1;
 	return 0;
 }

@@ -67,7 +67,7 @@ void init_group(Student* person);
 
 
 // Функции работы с данными
-int save_data(List* data);
+int save_data();
 int load_data(void);
 List* sum_lists(List* first, List* second);
 void drop_data(void);
