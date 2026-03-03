@@ -7,7 +7,6 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include <time.h>
 #include <locale.h>
 #include <conio.h>
 
@@ -67,11 +66,13 @@ void edit_Rate(Student* person, int flag);
 void init_group(Student* person);
 
 
-// Функции работы с файлами
+// Функции работы с данными
 int save_data(List* data);
 int load_data(void);
+List* sum_lists(List* first, List* second);
+void drop_data(void);
 
 
 // Глобальные переменные
 extern int menu_size;
-extern List Data;
+extern List* Data;

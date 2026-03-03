@@ -24,7 +24,7 @@ void menu(int select, enum Menu page) {
 		options = options_exit;
 		break;
 	case DataOptions:
-		print_List(&Data);
+		print_List(Data);
 		menu_size = 6;
 		static char* options_data[] = { "Добавить студентов", "Удалить студентов", "Сортировать", "Поиск", "Сохранить", "Назад"};
 		options = options_data;
@@ -82,10 +82,8 @@ void data_menu() {
 		if (move(&select)) {
 			switch (select) {
 			case 0:
-				List* new_Data = new_persons(); //TODO: FIX
-				Data = *new_Data;
-				free(new_Data->arr);
-				free(new_Data);
+				Data = sum_lists(Data, new_persons()); //TODO: FIX
+				break;
 			//case 1:
 			//	//del_persons(); 
 			case 2:
@@ -93,8 +91,10 @@ void data_menu() {
 					printf("\n\nОшибка сохранения!\n\n");
 				else
 					printf("\n\nУспешное сохранение\n\n");
+				break;
 			case 5:
 				flag = 0;
+				break;
 			}
 		}
 	}
@@ -127,8 +127,10 @@ void drop_menu() {
 				break;
 			}
 			else { // TODO: Добавить сохнанение сброса
-				Data.arr = NULL;
-				Data.size = NULL;
+				//free(Data->arr);
+				//Data->arr = NULL;
+				//Data->size = NULL;
+				drop_data();
 				break;
 			}
 		}

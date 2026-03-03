@@ -66,3 +66,27 @@ void print_Person(Student* persons) {
 	printf("%6d|%20s|%9s|%5d|%5d|%5d\n", p->id, p->name, p->groupstr, p->m1, p->m2, p->rate);
 	
 }
+
+
+List* sum_lists(List* first, List* second) {
+	ui size = first->size + second->size;
+	List* ptr = calloc(1, sizeof(List));
+	ptr->size = size;
+	ptr->arr = calloc(size, sizeof(Student));
+	for (int i = 0; i < first->size; i++)
+		ptr->arr[i] = first->arr[i];
+	for (int i = 0; i < second->size; i++)
+		ptr->arr[first->size + i] = second->arr[i];
+	free(first->arr);
+	free(first);
+	free(second->arr);
+	free(second);
+	return ptr;
+}
+
+
+void drop_data() {
+		free(Data->arr);
+		Data->arr = NULL;
+		Data->size = NULL;
+}

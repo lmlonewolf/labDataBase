@@ -41,18 +41,19 @@ void edit_Group(Student* person, int flag) {
 		printf("Прежнее значение: %s\n", person->groupstr);
 	}
 
-	time_t mytime = time(NULL);
-	struct tm* now = localtime(&mytime);
 	char temp[32];
 	short year, number;
 	while (1) {
 		printf("\nВведите группу студента по образцу ИДБ-25-00: ");
-		scanf_s(" %[^-]-%hd-%hd", temp, (unsigned int)sizeof(temp), &year, &number);
+		if (scanf_s(" %[^-]-%hd-%hd", temp, (unsigned int)sizeof(temp), &year, &number) != 3) {
+			printf("Ошибка формата ввода! Попробуйте ещё раз.");
+			continue;
+		}
 		if (strlen(temp) != 3) {
 			printf("Ошибка в буквеной части. Попробуйте ещё раз.\n\n");
 			continue;
 		}
-		else if ((year < 1) || (year > now->tm_year)) {
+		else if (year < 1) {
 			printf("Ошибка в годе группы. Попробуйте ещё раз.\n\n");
 			continue;
 		}

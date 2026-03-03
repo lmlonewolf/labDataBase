@@ -15,10 +15,7 @@
 */
 
 int menu_size = 0;
-List Data = {
-	NULL,
-	NULL
-};
+List* Data;
 
 int main() {
 	setlocale(LC_ALL, "");
