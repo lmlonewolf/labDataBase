@@ -79,4 +79,6 @@ int load_data(void);
 
 // Глобальные переменные
 extern int menu_size;
+extern us save_success;
+extern us load_success;
 extern List* Data;

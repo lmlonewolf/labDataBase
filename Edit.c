@@ -46,7 +46,7 @@ void edit_Group(Student* person, int flag) {
 	while (1) {
 		printf("\nВведите группу студента по образцу ИДБ-25-00: ");
 		if (scanf_s(" %[^-]-%hd-%hd", temp, (unsigned int)sizeof(temp), &year, &number) != 3) {
-			printf("Ошибка формата ввода! Попробуйте ещё раз.");
+			printf("\nОшибка формата ввода! Попробуйте ещё раз.\n");
 			continue;
 		}
 		if (strlen(temp) != 3) {

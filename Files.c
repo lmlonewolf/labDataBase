@@ -20,7 +20,7 @@ int load_data(void) {
 	Data->arr = calloc(count, sizeof(Student));
 	int res = fread(Data->arr, sizeof(Student), count, file);
 	fclose(file);
-	if (res != count){
+	if ((res != count) || (count == 0)){
 		Data->arr = NULL;
 		Data->size = NULL;
 		return 1;

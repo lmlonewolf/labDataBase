@@ -1,6 +1,7 @@
 #include "Header.h"
 
 
+
 void menu(int select, enum Menu page) {
 	system("cls");
 	char** options = NULL;
@@ -12,6 +13,12 @@ void menu(int select, enum Menu page) {
 		break;
 
 	case Start:
+		if (load_success)
+			printf("Пока данных нет\nИли случилась ошибка при загруске данных.\n\n");
+		if (save_success == 1)
+			printf("\nОшибка сохранения!\n\n");
+		else if (save_success == 0)
+			printf("\nУспешно сохранено!\n\n");
 		menu_size = 4;
 		static char* options_start[] = { "Список студентов", "Сбросить данные", "Сохранить", "Выход" };
 		options = options_start;
@@ -25,6 +32,10 @@ void menu(int select, enum Menu page) {
 		break;
 	case DataOptions:
 		print_List(Data);
+		if (save_success == 1)
+			printf("\nОшибка сохранения!\n\n");
+		else if (save_success == 0)
+			printf("\nУспешно сохранено!\n\n");
 		menu_size = 6;
 		static char* options_data[] = { "Добавить студентов", "Удалить студентов", "Сортировать", "Поиск", "Сохранить", "Назад"};
 		options = options_data;
@@ -60,9 +71,8 @@ void start_menu() {
 				case 1:
 					drop_menu();
 					break;
-					//TODO: Добавить сохранение
-				//case 2:
-				//	save_data();
+				case 2:
+					save_success = save_data();
 					break;
 				case 3:
 					exit_menu();
@@ -70,6 +80,8 @@ void start_menu() {
 			}
 		}
 	}
+	save_success = 2;
+	load_success = 0;
 }
 
 
@@ -86,11 +98,8 @@ void data_menu() {
 				break;
 			//case 1:
 			//	//del_persons(); 
-			case 2:
-				if (save_data())
-					printf("\n\nОшибка сохранения!\n\n");
-				else
-					printf("\n\nУспешное сохранение\n\n");
+			case 4:
+				save_success = save_data();
 				break;
 			case 5:
 				flag = 0;
@@ -98,6 +107,7 @@ void data_menu() {
 			}
 		}
 	}
+	save_success = 2;
 }
 
 
