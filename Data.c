@@ -61,8 +61,174 @@ List* sum_lists(List* first, List* second) {
 }
 
 
-void drop_data() {
-	free(Data->arr);
-	Data->arr = NULL;
-	Data->size = NULL;
+void drop_data(List* data) {
+		free(data->arr);
+		data->arr = NULL;
+		data->size = NULL;
+}
+
+
+int input_id() {
+	int temp;
+	while (1) {
+		printf("\nВведите номер студенческого билета: ");
+		if (scanf_s("%d", &temp) == 0) {
+			printf("Ошибка ввода! Попробуйте ещё раз.\n\n");
+			continue;
+		}
+		if ((temp < 100'000) || (temp >= 1'000'000))
+			printf("Ошибка ввода! Попробуйте ещё раз.\n\n");
+		else
+			break;
+	}
+	return temp;
+}
+
+
+void input_name(char* temp) {
+	while (1) {
+		printf("\nВведите имя студента: ");
+		if (scanf_s("\n%64[^\n]", temp, (unsigned int)sizeof(temp)) == 0) {
+			printf("Ошибка ввода! Попробуйте ещё раз.\n\n");
+			continue;
+		}
+		if (strlen(temp) > 32)
+			printf("Слишком длинное имя. Попробуйте ещё раз.\n\n");
+		else
+			break;
+	}
+}
+
+
+void input_group(char* temp, short* year, short* number) {
+	while (1) {
+		printf("\nВведите группу студента по образцу ИДБ-25-00: ");
+		if (scanf_s(" %[^-]-%hd-%hd", temp, (unsigned int)sizeof(temp), year, number) != 3) {
+			printf("\nОшибка формата ввода! Попробуйте ещё раз.\n");
+			continue;
+		}
+		if (strlen(temp) != 3) {
+			printf("Ошибка в буквеной части. Попробуйте ещё раз.\n\n");
+			continue;
+		}
+		else if (*year < 0) {
+			printf("Ошибка в годе группы. Попробуйте ещё раз.\n\n");
+			continue;
+		}
+		else if ((*number < 1) || (*number >= 100)) {
+			printf("Ошибка в номере группы. Попробуйте ещё раз.\n\n");
+			continue;
+		}
+		else
+			break;
+	}
+	for (int i = 0; i < 3; i++)
+		temp[i] = toupper(temp[i]);
+}
+
+
+int input_modul(int num) {
+	int temp;
+	while (1) {
+		if (num == 0)
+			printf("\nВведите итоговую оценку: ");
+		else
+			printf("\nВведите результат Модуля %d: ", num);
+		if (scanf_s("%d", &temp) == 0) {
+			printf("Ошибка ввода! Попробуйте ещё раз.\n\n");
+			continue;
+		}
+		if (temp == 0) {
+			temp = NULL;
+			break;
+		}
+		if ((temp > 100) || (temp < 25))
+			printf("Ошибка ввода! Попробуйте ещё раз.\n\n");
+		else
+			break;
+	}
+	return temp;
+}
+
+
+void find(enum Column cl) {
+	system("cls");
+	drop_data(fData);
+	List* fdata = calloc(1, sizeof(List));
+	fdata->size = 0;
+	fdata->arr = calloc(Data->size, sizeof(Student));
+	int tempi;
+	char tempc[256];
+
+	switch (cl) {
+		case ID:
+			tempi = input_id();
+			ui el;
+			for (int i = 0; i < Data->size; i++) {
+				el = Data->arr[i].id;
+				if (el == tempi) {
+					fdata->arr[fdata->size] = Data->arr[i];
+					fdata->size++;
+				}
+			}
+			break;
+
+		case Name:
+			input_name(tempc);
+			for (int i = 0; i < Data->size; i++) {
+				if (strcmp(Data->arr[i].name, tempc) == 0) {
+					fdata->arr[fdata->size] = Data->arr[i];
+					fdata->size++;
+				}
+			}
+			break;
+
+		case Group:
+			short year, number;
+			input_group(tempc, &year, &number);
+			for (int i = 0; i < Data->size; i++) {
+				if ((strcmp(Data->arr[i].group.name, tempc) == 0) && (Data->arr[i].group.number == number) && (Data->arr[i].group.year == year)) {
+					fdata->arr[fdata->size] = Data->arr[i];
+					fdata->size++;
+				}
+			}
+			break;
+
+		case M1:
+			tempi = input_modul(1);
+			for (int i = 0; i < Data->size; i++) {
+				el = Data->arr[i].m1;
+				if (el == tempi) {
+					fdata->arr[fdata->size] = Data->arr[i];
+					fdata->size++;
+				}
+			}
+			break;
+
+		case M2:
+			tempi = input_modul(2);
+			for (int i = 0; i < Data->size; i++) {
+				el = Data->arr[i].m2;
+				if (el == tempi) {
+					fdata->arr[fdata->size] = Data->arr[i];
+					fdata->size++;
+				}
+			}
+			break;
+
+		case Rate:
+			tempi = input_modul(0);
+			for (int i = 0; i < Data->size; i++) {
+				el = Data->arr[i].rate;
+				if (el == tempi) {
+					fdata->arr[fdata->size] = Data->arr[i];
+					fdata->size++;
+				}
+			}
+			break;
+	}
+	if (fdata->size == 0)
+		is_find++;
+	fData = realloc(fdata, fdata->size * sizeof(Student));
+	is_find++;
 }

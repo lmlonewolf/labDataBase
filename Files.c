@@ -26,6 +26,10 @@ int load_data(void) {
 		return 1;
 	}
 	Data->size = count;
+	// инициализируем структуру найденых данных
+	fData = calloc(1, sizeof(List));
+	fData->arr = NULL;
+	fData->size = NULL;
 	return 0;
 }
 

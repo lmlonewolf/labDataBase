@@ -35,8 +35,19 @@ enum Menu {
 	Start,
 	Edit,
 	Exit,
+	Find,
 	DataOptions,
 	Drop
+};
+
+
+enum Column {
+	ID,
+	Name,
+	Group,
+	M1,
+	M2,
+	Rate
 };
 
 
@@ -66,9 +77,14 @@ void init_group(Student* person);
 
 // Функции с данными
 List* new_persons(void);
+int input_id(void);
+void input_name(char* temp);
+void input_group(char* temp, short* year, short* number);
+int input_modul(int num);
 int init_person(Student* person, int num);
 List* sum_lists(List* first, List* second);
-void drop_data(void);
+void drop_data(List* data);
+void find(enum Column cl);
 
 
 // Функции работы с файлами
@@ -82,3 +98,5 @@ extern int menu_size;
 extern us save_success;
 extern us load_success;
 extern List* Data;
+extern int is_find;
+extern List* fData;

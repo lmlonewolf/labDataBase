@@ -41,10 +41,22 @@ void menu(int select, enum Menu page) {
 		options = options_data;
 		break;
 	case Drop:
-		menu_size = 2;
 		printf("Вы уверены, что хотите сбросить данные? Отменить изменения невозможно!\n\n");
+		menu_size = 2;
 		static char* options_drop[] = { "Назад", "Сбросить" };
 		options = options_drop;
+		break;
+	case Find:
+		if (is_find == 1) {
+			printf("Найдены студенты по вашему запросу\n");
+			print_List(fData);
+		}
+		else if (is_find == 2)
+			printf("По вашему запросу студентов не найдено!\n\n");
+		printf("Выберите столбец для поиска:\n\n");
+		menu_size = 7;
+		static char* options_find[] = { "ID", "Имя", "Группа", "Модуль 1", "Модуль 2", "Рейтинг", "Назад"};
+		options = options_find;
 		break;
 	}
 
@@ -55,6 +67,42 @@ void menu(int select, enum Menu page) {
 		else
 			printf("%s\n", options[i]);
 	}
+}
+
+
+void find_menu() {
+	int select = 0;
+	int flag = 1;
+	while (flag) {
+		menu(select, Find);
+		if (move(&select)) { // Enter
+			switch (select) {
+			case 0:
+				find(ID);
+				break;
+			case 1:
+				find(Name);
+				break;
+			case 2:
+				find(Group);
+				break;
+			case 3:
+				find(M1);
+				break;
+			case 4:
+				find(M2);
+				break;
+			case 5:
+				find(Rate);
+				break;
+			case 6:
+				flag = 0;
+				break;
+			}
+		}
+	}
+	is_find = 0;
+	save_success = 2;
 }
 
 
@@ -100,8 +148,8 @@ void data_menu() {
 			//	del_persons(); 
 			//case 2:
 			//  sort()
-			//case 3:
-			//  find()
+			case 3:
+				find_menu();
 			//case 4:
 			//  edit()
 			case 5:
@@ -143,7 +191,7 @@ void drop_menu() {
 				break;
 			}
 			else {
-				drop_data();
+				drop_data(Data);
 				break;
 			}
 		}
@@ -173,6 +221,7 @@ void edit_menu(Student* person) {
 			}
 		}
 	}
+	save_success = 2;
 }
 
 
