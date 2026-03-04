@@ -14,7 +14,7 @@ int save_data(void) {
 int load_data(void) {
 	FILE* file = fopen("data.dat", "rb");
 	int desk = fileno(file);
-	size_t bsize = _filelength(desk);
+	size_t bsize = filelength(desk);
 	ui count = bsize / sizeof(Student);
 	Data = calloc(1, sizeof(List));
 	Data->arr = calloc(count, sizeof(Student));

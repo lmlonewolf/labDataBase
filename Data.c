@@ -29,7 +29,7 @@ List* new_persons() {
 }
 
 
-int init_person(Student* person, int num) { // TODO: раскидать по функциям проверки и изменения
+int init_person(Student* person, int num) { 
 	system("cls");
 	if (num != 1) // для инициализации в списке
 		printf("Инициализация студента %d\n", num);

@@ -1,4 +1,6 @@
 #include "Header.h"
+#include <ctype.h>
+
 
 void edit_ID(Student* person, int flag){
 	if (flag == 1) {
@@ -64,6 +66,8 @@ void edit_Group(Student* person, int flag) {
 		else
 			break;
 	}
+	for (int i = 0; i < 3; i++)
+		temp[i] = toupper(temp[i]);
 	strcpy(person->group.name, temp);
 	person->group.year = year;
 	person->group.number = number;
