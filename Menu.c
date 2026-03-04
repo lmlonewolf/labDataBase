@@ -1,5 +1,5 @@
 #include "Header.h"
-
+#include <conio.h>
 
 
 void menu(int select, enum Menu page) {
@@ -7,6 +7,12 @@ void menu(int select, enum Menu page) {
 	char** options = NULL;
 	switch (page) { // Выбор раздела меню
 	case Edit:
+		if (save_success == 1)
+			printf("\nОшибка сохранения!\n\n");
+		else if (save_success == 0)
+			printf("\nУспешно сохранено!\n\n");
+		print_Person(&fData->arr[0]); // Вывод заголовка
+		printf("\nВыберете пункты для изменения:\n\n");
 		menu_size = 8;
 		static char* options_edit[] = { "ID", "Имя", "Группа", "Модуль 1", "Модуль 2", "Рейтинг", "Сохранить", "Выйти"};
 		options = options_edit;
@@ -135,7 +141,6 @@ void start_menu() {
 
 void data_menu() {
 	int select = 0;
-	
 	int flag = 1;
 	while (flag) {
 		menu(select, DataOptions);
@@ -150,8 +155,10 @@ void data_menu() {
 			//  sort()
 			case 3:
 				find_menu();
-			//case 4:
-			//  edit()
+				break;
+			case 4:
+				edit_menu();
+				break;
 			case 5:
 				save_success = save_data();
 				break;
@@ -199,22 +206,47 @@ void drop_menu() {
 }
 
 
-void edit_menu(Student* person) {
+void edit_menu() {
 	int select = 0;
 	int flag = 1;
+	while (1) {
+		system("cls");
+		printf("Для изменения информации о студенте введите его ID\n");
+		system("pause");
+		find(ID);
+		if (is_find == 2) {
+			printf("Студент с данным ID не найден. Попробуйте ещё раз.\n");
+			system("pause");
+		}
+		else
+			break;
+	}
+	Student* person = &fData->arr[0];
 	while (flag) {
-		print_Person(person); // Вывод заголовка
-		printf("\nВыберете пункты для изменения:\n\n");
 		menu(select, Edit);
 		if(move(&select)) { //Управление
 			switch (select) { // TODO: Добавить изменение по пунктам
-			//case 0:
-			//case 1:
-			//case 2:
-			//case 3:
-			//case 4:
-			//case 5:
-			//case 6:
+			case 0:
+				edit_ID(person, 1);
+				break;
+			case 1:
+				edit_Name(person, 1);
+				break;
+			case 2:
+				edit_Group(person, 1);
+				break;
+			case 3:
+				edit_Modul(person, 1, 1);
+				break;
+			case 4:
+				edit_Modul(person, 2, 1);
+				break;
+			case 5:
+				edit_Rate(person, 1);
+				break;
+			case 6:
+				save_success = save_data();
+				break;
 			case 7:
 				flag = 0;
 				break;

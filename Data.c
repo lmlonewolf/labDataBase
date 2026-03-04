@@ -38,8 +38,7 @@ int init_person(Student* person, int num) {
 	edit_Group(person, 0);
 	edit_Modul(person, 1, 0);
 	edit_Modul(person, 2, 0);
-	edit_Rate(person, 0);
-	init_group(person); 
+	edit_Rate(person, 0); 
 	print_Person(person);
 }
 

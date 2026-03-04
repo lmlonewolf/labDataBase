@@ -1,5 +1,5 @@
 #include "Header.h"
-	
+#include <locale.h>
 
 /*: 
 поиск / фильтры

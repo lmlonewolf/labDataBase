@@ -7,8 +7,6 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include <locale.h>
-#include <conio.h>
 
 
 struct Group {
@@ -53,7 +51,7 @@ enum Column {
 
 // Функции меню
 void menu(int select, enum Menu page);
-void edit_menu(Student* person);
+void edit_menu();
 void exit_menu(void);
 void start_menu(void);
 void data_menu(void);

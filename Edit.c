@@ -34,6 +34,7 @@ void edit_Group(Student* person, int flag) {
 	strcpy(person->group.name, temp);
 	person->group.year = year;
 	person->group.number = number;
+	init_group(person);
 }
 
 
