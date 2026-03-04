@@ -14,7 +14,7 @@ void menu(int select, enum Menu page) {
 		print_Person(&fData->arr[0]); // Вывод заголовка
 		printf("\nВыберете пункты для изменения:\n\n");
 		menu_size = 8;
-		static char* options_edit[] = { "ID", "Имя", "Группа", "Модуль 1", "Модуль 2", "Рейтинг", "Сохранить", "Выйти"};
+		static char* options_edit[] = { "ID", "Имя", "Группа", "Модуль 1", "Модуль 2", "Рейтинг", "Сохранить", "Назад"};
 		options = options_edit;
 		break;
 
@@ -225,7 +225,7 @@ void edit_menu() {
 	while (flag) {
 		menu(select, Edit);
 		if(move(&select)) { //Управление
-			switch (select) { // TODO: Добавить изменение по пунктам
+			switch (select) { 
 			case 0:
 				edit_ID(person, 1);
 				break;
@@ -245,7 +245,7 @@ void edit_menu() {
 				edit_Rate(person, 1);
 				break;
 			case 6:
-				save_success = save_data();
+				save_success = save_data(); // TODO: fData сохранять в дата
 				break;
 			case 7:
 				flag = 0;

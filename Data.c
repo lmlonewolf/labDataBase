@@ -61,7 +61,8 @@ List* sum_lists(List* first, List* second) {
 
 
 void drop_data(List* data) {
-		free(data->arr);
+		if (data)
+			free(data->arr);
 		data->arr = NULL;
 		data->size = NULL;
 }
@@ -150,12 +151,12 @@ int input_modul(int num) {
 }
 
 
+
 void find(enum Column cl) {
 	system("cls");
 	drop_data(fData);
-	List* fdata = calloc(1, sizeof(List));
-	fdata->size = 0;
-	fdata->arr = calloc(Data->size, sizeof(Student));
+	fData->size = 0;
+	fData->arr = calloc(Data->size, sizeof(Student));
 	int tempi;
 	char tempc[256];
 
@@ -166,8 +167,8 @@ void find(enum Column cl) {
 			for (int i = 0; i < Data->size; i++) {
 				el = Data->arr[i].id;
 				if (el == tempi) {
-					fdata->arr[fdata->size] = Data->arr[i];
-					fdata->size++;
+					fData->arr[fData->size] = Data->arr[i];
+					fData->size++;
 				}
 			}
 			break;
@@ -176,8 +177,8 @@ void find(enum Column cl) {
 			input_name(tempc);
 			for (int i = 0; i < Data->size; i++) {
 				if (strcmp(Data->arr[i].name, tempc) == 0) {
-					fdata->arr[fdata->size] = Data->arr[i];
-					fdata->size++;
+					fData->arr[fData->size] = Data->arr[i];
+					fData->size++;
 				}
 			}
 			break;
@@ -187,8 +188,8 @@ void find(enum Column cl) {
 			input_group(tempc, &year, &number);
 			for (int i = 0; i < Data->size; i++) {
 				if ((strcmp(Data->arr[i].group.name, tempc) == 0) && (Data->arr[i].group.number == number) && (Data->arr[i].group.year == year)) {
-					fdata->arr[fdata->size] = Data->arr[i];
-					fdata->size++;
+					fData->arr[fData->size] = Data->arr[i];
+					fData->size++;
 				}
 			}
 			break;
@@ -198,8 +199,8 @@ void find(enum Column cl) {
 			for (int i = 0; i < Data->size; i++) {
 				el = Data->arr[i].m1;
 				if (el == tempi) {
-					fdata->arr[fdata->size] = Data->arr[i];
-					fdata->size++;
+					fData->arr[fData->size] = Data->arr[i];
+					fData->size++;
 				}
 			}
 			break;
@@ -209,8 +210,8 @@ void find(enum Column cl) {
 			for (int i = 0; i < Data->size; i++) {
 				el = Data->arr[i].m2;
 				if (el == tempi) {
-					fdata->arr[fdata->size] = Data->arr[i];
-					fdata->size++;
+					fData->arr[fData->size] = Data->arr[i];
+					fData->size++;
 				}
 			}
 			break;
@@ -220,14 +221,14 @@ void find(enum Column cl) {
 			for (int i = 0; i < Data->size; i++) {
 				el = Data->arr[i].rate;
 				if (el == tempi) {
-					fdata->arr[fdata->size] = Data->arr[i];
-					fdata->size++;
+					fData->arr[fData->size] = Data->arr[i];
+					fData->size++;
 				}
 			}
 			break;
 	}
-	if (fdata->size == 0)
+	if (fData->size == 0)
 		is_find++;
-	fData = realloc(fdata, fdata->size * sizeof(Student));
+	fData->arr = realloc(fData->arr, fData->size * sizeof(Student));
 	is_find++;
 }

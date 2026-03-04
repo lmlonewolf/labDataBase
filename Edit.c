@@ -4,7 +4,7 @@
 
 void edit_ID(Student* person, int flag){
 	if (flag == 1) {
-		printf("Прежнее значение: %d\n", person->id);
+		printf("\nПрежнее значение: %d\n", person->id);
 	}
 
 	person->id = input_id();
@@ -13,7 +13,7 @@ void edit_ID(Student* person, int flag){
 
 void edit_Name(Student* person, int flag) {
 	if (flag == 1) {
-		printf("Прежнее значение: %s\n", person->name);
+		printf("\nПрежнее значение: %s\n", person->name);
 	}
 
 	char temp[256];
@@ -24,7 +24,7 @@ void edit_Name(Student* person, int flag) {
 
 void edit_Group(Student* person, int flag) {
 	if (flag == 1) {
-		printf("Прежнее значение: %s\n", person->groupstr);
+		printf("\nПрежнее значение: %s\n", person->groupstr);
 	}
 
 	char temp[32];
@@ -40,9 +40,9 @@ void edit_Group(Student* person, int flag) {
 
 void edit_Modul(Student* person, us num, int flag) {
 	if (flag == 1 && num == 1)
-		printf("Прежнее значение: %d\n", person->m1);
+		printf("\nПрежнее значение: %d\n", person->m1);
 	else if (flag == 1)
-		printf("Прежнее значение: %d\n", person->m2);
+		printf("\nПрежнее значение: %d\n", person->m2);
 
 	if (num == 1)
 		person->m1 = input_modul(1);
@@ -53,7 +53,7 @@ void edit_Modul(Student* person, us num, int flag) {
 
 void edit_Rate(Student* person, int flag) {
 	if (flag == 1) {
-		printf("Прежнее значение: %d\n", person->rate);
+		printf("\nПрежнее значение: %d\n", person->rate);
 	}
 
 	int temp;
