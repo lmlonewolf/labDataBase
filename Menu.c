@@ -5,7 +5,20 @@
 void menu(int select, enum Menu page) {
 	system("cls");
 	char** options = NULL;
+
 	switch (page) { // Выбор раздела меню
+	case Del:
+		if (save_success == 1)
+			printf("\nОшибка сохранения!\n\n");
+		else if (save_success == 0)
+			printf("\nУспешно сохранено!\n\n");
+		print_List(Data); // Вывод заголовка
+		printf("\nВыберете пункт по которым будите удалять студентов:\n\n");
+		menu_size = 9;
+		static char* options_del[] = { "ID", "Имя", "Группа", "Модуль 1", "Модуль 2", "Рейтинг\n", "Отменить", "Сохранить", "Назад" };
+		options = options_del;
+		break;
+
 	case Edit:
 		if (save_success == 1)
 			printf("\nОшибка сохранения!\n\n");
@@ -14,10 +27,10 @@ void menu(int select, enum Menu page) {
 		print_Person(&fData->arr[0]); // Вывод заголовка
 		printf("\nВыберете пункты для изменения:\n\n");
 		menu_size = 8;
-		static char* options_edit[] = { "ID", "Имя", "Группа", "Модуль 1", "Модуль 2", "Рейтинг", "Сохранить", "Назад"};
+		static char* options_edit[] = { "ID", "Имя", "Группа", "Модуль 1", "Модуль 2", "Рейтинг\n", "Сохранить", "Назад"};
 		options = options_edit;
 		break;
-
+		
 	case Start:
 		if (load_success)
 			printf("Пока данных нет\nИли случилась ошибка при загруске данных.\n\n");
@@ -36,6 +49,7 @@ void menu(int select, enum Menu page) {
 		static char* options_exit[] = { "Назад", "Выйти" };
 		options = options_exit;
 		break;
+
 	case DataOptions:
 		print_List(Data);
 		if (save_success == 1)
@@ -43,15 +57,17 @@ void menu(int select, enum Menu page) {
 		else if (save_success == 0)
 			printf("\nУспешно сохранено!\n\n");
 		menu_size = 7;
-		static char* options_data[] = { "Добавить студентов", "Удалить студентов", "Сортировать", "Поиск", "Изменить", "Сохранить", "Назад"};
+		static char* options_data[] = { "Добавить студентов", "Удалить студентов", "Сортировать", "Поиск", "Изменить\n", "Сохранить", "Назад"};
 		options = options_data;
 		break;
+
 	case Drop:
 		printf("Вы уверены, что хотите сбросить данные? Отменить изменения невозможно!\n\n");
 		menu_size = 2;
 		static char* options_drop[] = { "Назад", "Сбросить" };
 		options = options_drop;
 		break;
+
 	case Find:
 		if (is_find == 1) {
 			printf("Найдены студенты по вашему запросу\n");
@@ -61,7 +77,7 @@ void menu(int select, enum Menu page) {
 			printf("По вашему запросу студентов не найдено!\n\n");
 		printf("Выберите столбец для поиска:\n\n");
 		menu_size = 7;
-		static char* options_find[] = { "ID", "Имя", "Группа", "Модуль 1", "Модуль 2", "Рейтинг", "Назад"};
+		static char* options_find[] = { "ID", "Имя", "Группа", "Модуль 1", "Модуль 2", "Рейтинг\n", "Назад"};
 		options = options_find;
 		break;
 	}
@@ -84,24 +100,66 @@ void find_menu() {
 		if (move(&select)) { // Enter
 			switch (select) {
 			case 0:
-				find(ID);
+				find_persons(ID);
 				break;
 			case 1:
-				find(Name);
+				find_persons(Name);
 				break;
 			case 2:
-				find(Group);
+				find_persons(Group);
 				break;
 			case 3:
-				find(M1);
+				find_persons(M1);
 				break;
 			case 4:
-				find(M2);
+				find_persons(M2);
 				break;
 			case 5:
-				find(Rate);
+				find_persons(Rate);
 				break;
 			case 6:
+				flag = 0;
+				break;
+			}
+		}
+	}
+	is_find = 0;
+	save_success = 2;
+}
+
+
+void del_menu() {
+	int select = 0;
+	int flag = 1;
+	while (flag) {
+		menu(select, Del);
+		if (move(&select)) { // Enter
+			switch (select) {
+			case 0:
+				del_persons(ID);
+				break;
+			case 1:
+				del_persons(Name);
+				break;
+			case 2:
+				del_persons(Group);
+				break;
+			case 3:
+				del_persons(M1);
+				break;
+			case 4:
+				del_persons(M2);
+				break;
+			case 5:
+				del_persons(Rate);
+				break;
+			case 6:
+				load_success = load_data();
+				break;
+			case 7:
+				save_success = save_data();
+				break;
+			case 8:
 				flag = 0;
 				break;
 			}
@@ -149,8 +207,9 @@ void data_menu() {
 			case 0:
 				Data = sum_lists(Data, new_persons()); //TODO: добавить функции
 				break;
-			//case 1:
-			//	del_persons(); 
+			case 1:
+				del_menu(); 
+				break;
 			//case 2:
 			//  sort()
 			case 3:

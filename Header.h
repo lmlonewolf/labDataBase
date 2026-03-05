@@ -35,7 +35,8 @@ enum Menu {
 	Exit,
 	Find,
 	DataOptions,
-	Drop
+	Drop,
+	Del
 };
 
 
@@ -51,7 +52,8 @@ enum Column {
 
 // Функции меню
 void menu(int select, enum Menu page);
-void edit_menu();
+void edit_menu(void);
+void del_menu(void);
 void exit_menu(void);
 void start_menu(void);
 void data_menu(void);
@@ -83,7 +85,8 @@ int input_modul(int num);
 int init_person(Student* person, int num);
 List* sum_lists(List* first, List* second);
 void drop_data(List* data);
-void find(enum Column cl);
+void find_persons(enum Column cl);
+void del_persons(enum Column cl);
 
 
 // Функции работы с файлами

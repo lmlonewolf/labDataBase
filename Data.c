@@ -154,7 +154,7 @@ int input_modul(int num) {
 
 
 
-void find(enum Column cl) {
+void find_persons(enum Column cl) {
 	system("cls");
 	drop_data(fData);
 	fData->size = 0;
@@ -233,4 +233,81 @@ void find(enum Column cl) {
 		is_find++;
 	fData->arr = realloc(fData->arr, fData->size * sizeof(Student));
 	is_find++;
+}
+
+
+void del_persons(enum Column cl) {
+	system("cls");
+	int tempi;
+	char tempc[256];
+	int deleted = 0;
+	switch (cl) {
+	case ID:
+		tempi = input_id();
+		ui el;
+		for (int i = 0; i < Data->size; i++) {
+			el = Data->arr[i].id;
+			if (el == tempi)
+				deleted++;
+			else
+				Data->arr[i - deleted] = Data->arr[i];
+		}
+		break;
+
+	case Name:
+		input_name(tempc);
+		for (int i = 0; i < Data->size; i++) {
+			if (strcmp(Data->arr[i].name, tempc) == 0)
+				deleted++;
+			else
+				Data->arr[i - deleted] = Data->arr[i];
+		}
+		break;
+
+	case Group:
+		short year, number;
+		input_group(tempc, &year, &number);
+		for (int i = 0; i < Data->size; i++) {
+			if ((strcmp(Data->arr[i].group.name, tempc) == 0) && (Data->arr[i].group.number == number) && (Data->arr[i].group.year == year))
+				deleted++;
+			else
+				Data->arr[i - deleted] = Data->arr[i];
+		}
+		break;
+
+	case M1:
+		tempi = input_modul(1);
+		for (int i = 0; i < Data->size; i++) {
+			el = Data->arr[i].m1;
+			if (el == tempi)
+				deleted++;
+			else
+				Data->arr[i - deleted] = Data->arr[i];
+		}
+		break;
+
+	case M2:
+		tempi = input_modul(2);
+		for (int i = 0; i < Data->size; i++) {
+			el = Data->arr[i].m2;
+			if (el == tempi)
+				deleted++;
+			else
+				Data->arr[i - deleted] = Data->arr[i];
+		}
+		break;
+
+	case Rate:
+		tempi = input_modul(0);
+		for (int i = 0; i < Data->size; i++) {
+			el = Data->arr[i].rate;
+			if (el == tempi)
+				deleted++;
+			else
+				Data->arr[i - deleted] = Data->arr[i];
+		}
+		break;
+	}
+	Data->size -= deleted;
+	Data->arr = realloc(Data->arr, Data->size * sizeof(Student));
 }
