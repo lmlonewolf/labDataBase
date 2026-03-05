@@ -17,9 +17,9 @@ void print_List(List* persons) {
 }
 
 
-void print_Person(Student* persons) {
+void print_Person(Student* person) {
 	printf("\n%6s|%20s|%9s|%5s|%5s|%s\n", "ID", "Èìÿ", "Ãğóïïà", "M1", "M2", "Ğåéòèíã");
-	const Student* p = persons;
+	const Student* p = person;
 	printf("%6d|%20s|%9s|%5d|%5d|%5d\n", p->id, p->name, p->groupstr, p->m1, p->m2, p->rate);
 
 }

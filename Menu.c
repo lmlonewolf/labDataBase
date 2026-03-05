@@ -209,19 +209,21 @@ void drop_menu() {
 void edit_menu() {
 	int select = 0;
 	int flag = 1;
+	Student* person;
 	while (1) {
 		system("cls");
 		printf("Для изменения информации о студенте введите его ID\n");
 		system("pause");
-		find(ID);
-		if (is_find == 2) {
+		person = find_to_edit();
+		if (person == NULL) {
 			printf("Студент с данным ID не найден. Попробуйте ещё раз.\n");
 			system("pause");
 		}
 		else
 			break;
 	}
-	Student* person = &fData->arr[0];
+	fData->size = 1;
+	fData->arr = person;
 	while (flag) {
 		menu(select, Edit);
 		if(move(&select)) { //Управление

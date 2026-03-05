@@ -57,11 +57,12 @@ void start_menu(void);
 void data_menu(void);
 void drop_menu(void);
 int move(int* select);
+Student* find_to_edit(void);
 
 
 // Функции вывода
 void print_List(List* persons);
-void print_Person(Student* persons);
+void print_Person(Student* person);
 
 
 // Функции именения полей

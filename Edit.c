@@ -2,6 +2,19 @@
 #include <ctype.h>
 
 
+
+Student* find_to_edit() {
+	int temp = input_id();
+	ui el;
+	for (int i = 0; i < Data->size; i++) {
+		el = Data->arr[i].id;
+		if (el == temp)
+			return &Data->arr[i];
+	}
+	return NULL;
+}
+
+
 void edit_ID(Student* person, int flag){
 	if (flag == 1) {
 		printf("\nПрежнее значение: %d\n", person->id);
