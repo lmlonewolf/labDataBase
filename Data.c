@@ -88,15 +88,17 @@ int input_id() {
 void input_name(char* temp) {
 	while (1) {
 		printf("\nВведите имя студента: ");
-		if (scanf_s("\n%64[^\n]", temp, (unsigned int)sizeof(temp)) == 0) {
+		if (fgets(temp, 256, stdin) == NULL) {
 			printf("Ошибка ввода! Попробуйте ещё раз.\n\n");
 			continue;
 		}
-		if (strlen(temp) > 32)
-			printf("Слишком длинное имя. Попробуйте ещё раз.\n\n");
+		int l = strlen(temp);
+		if (strlen(temp) > 32 || strlen(temp) < 2)
+			printf("\nНедопустимая длина. Попробуйте ещё раз.\n\n");
 		else
 			break;
 	}
+	temp[strlen(temp) - 1] = '\0';
 }
 
 
