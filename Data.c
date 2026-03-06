@@ -1,4 +1,5 @@
 #include "Header.h"
+#include <ctype.h>
 
 
 List* new_persons() { // Создания списка студентов
@@ -70,6 +71,17 @@ void drop_data(List* data) { // Сьрасываем данные по указателю, попутно очищая К
 }
 
 
+int str_is_alpha(char* str, int space) { // Проверки корректности строки
+	int i = 0;
+	while ((str[i] != '\n') && (str[i] != '\0')) {
+		if (ispunct(str[i]) || isdigit(str[i]) || iscntrl(str[i]) || (space ? 0: isspace(str[i])))
+			return 1;
+		i++;
+	}
+	return 0;
+}
+
+
 int input_id() { // Введение ID
 	int temp;
 	while (1) {
@@ -88,9 +100,10 @@ int input_id() { // Введение ID
 
 
 void input_name(char* temp) { // Введение имени
+	getchar();
 	while (1) {
 		printf("\nВведите имя студента: ");
-		if (fgets(temp, 256, stdin) == NULL) {
+		if ((fgets(temp, 256, stdin) == NULL) || (str_is_alpha(temp, 1))) {
 			printf("Ошибка ввода! Попробуйте ещё раз.\n\n");
 			continue;
 		}
@@ -107,7 +120,7 @@ void input_name(char* temp) { // Введение имени
 void input_group(char* temp, short* year, short* number) { // Введение группы
 	while (1) {
 		printf("\nВведите группу студента по образцу ИДБ-25-00: ");
-		if (scanf_s(" %[^-]-%hd-%hd", temp, (unsigned int)sizeof(temp), year, number) != 3) {
+		if ((scanf_s(" %[^-]-%hd-%hd", temp, (unsigned int)sizeof(temp), year, number) != 3) || (str_is_alpha(temp, 0))) {
 			printf("\nОшибка формата ввода! Попробуйте ещё раз.\n");
 			continue;
 		}
