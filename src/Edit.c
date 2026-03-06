@@ -2,7 +2,7 @@
 #include <ctype.h>
 
 
-Student* find_to_edit() {
+Student* find_to_edit() { // поиск студента для последующего изменения
 	int temp = input_id();
 	ui el;
 	for (int i = 0; i < mainData->size; i++) {
@@ -14,7 +14,7 @@ Student* find_to_edit() {
 }
 
 
-void edit_ID(Student* person, int flag){
+void edit_ID(Student* person, int flag){ // Изменить ID
 	if (flag == 1) {
 		printf("\nПрежнее значение: %d\n", person->id);
 	}
@@ -23,7 +23,7 @@ void edit_ID(Student* person, int flag){
 }
 
 
-void edit_Name(Student* person, int flag) {
+void edit_Name(Student* person, int flag) { // Изменить имя
 	if (flag == 1) {
 		printf("\nПрежнее значение: %s\n", person->name);
 	}
@@ -34,7 +34,7 @@ void edit_Name(Student* person, int flag) {
 }
 
 
-void edit_Group(Student* person, int flag) {
+void edit_Group(Student* person, int flag) { // Изменить группу
 	if (flag == 1) {
 		printf("\nПрежнее значение: %s\n", person->groupstr);
 	}
@@ -50,7 +50,7 @@ void edit_Group(Student* person, int flag) {
 }
 
 
-void edit_Modul(Student* person, us num, int flag) {
+void edit_Modul(Student* person, us num, int flag) { // Изменить модуль
 	if (flag == 1 && num == 1)
 		printf("\nПрежнее значение: %d\n", person->m1);
 	else if (flag == 1)
@@ -63,7 +63,7 @@ void edit_Modul(Student* person, us num, int flag) {
 }
 
 
-void edit_Rate(Student* person, int flag) {
+void edit_Rate(Student* person, int flag) { // Изменить рейтинг
 	if (flag == 1) {
 		printf("\nПрежнее значение: %d\n", person->rate);
 	}
@@ -79,6 +79,6 @@ void edit_Rate(Student* person, int flag) {
 }
 
 
-void init_group(Student* person) {
+void init_group(Student* person) { // Инициализация строки с названием группы и структуры группы
 	snprintf(person->groupstr, sizeof(person->groupstr), "%s-%d-%s%d", person->group.name, person->group.year, (person->group.number / 10 == 0) ? "0" : "", person->group.number);
 }

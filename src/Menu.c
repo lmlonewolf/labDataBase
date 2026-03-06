@@ -2,52 +2,52 @@
 #include <conio.h>
 
 
-void menu(int select, enum Menu page) {
+void menu(int select, enum Menu page) { // Функция меню
 	system("cls");
 	char** options = NULL;
 
 	switch (page) { // Выбор раздела меню
-	case Del:
+	case Del: // Раздел удаления данных
 		if (save_success == 1)
 			printf("\nОшибка сохранения!\n\n");
 		else if (save_success == 0)
 			printf("\nУспешно сохранено!\n\n");
-		print_List(mainData); // Вывод заголовка
+		print_List(mainData); 
 		printf("\nВыберете пункт по которым будите удалять студентов:\n\n");
 		menu_size = 9;
 		static char* options_del[] = { "ID", "Имя", "Группа", "Модуль 1", "Модуль 2", "Рейтинг\n", "Отменить", "Сохранить", "Назад" };
 		options = options_del;
 		break;
 
-	case Edit:
+	case Edit: // Раздел изменения данных
 		if (save_success == 1)
 			printf("\nОшибка сохранения!\n\n");
 		else if (save_success == 0)
 			printf("\nУспешно сохранено!\n\n");
-		print_Person(&findData->arr[0]); // Вывод заголовка
+		print_Person(&findData->arr[0]); 
 		printf("\nВыберете пункты для изменения:\n\n");
 		menu_size = 8;
 		static char* options_edit[] = { "ID", "Имя", "Группа", "Модуль 1", "Модуль 2", "Рейтинг\n", "Сохранить", "Назад"};
 		options = options_edit;
 		break;
 		
-	case MainSort:
-		print_List(mainData); // Вывод заголовка
+	case MainSort: // Раздел сортировки основных данных
+		print_List(mainData); 
 		printf("\nВыберете пункты для сортировки:\n\n");
 		menu_size = 8;
 		static char* options_sort_main[] = { "ID", "Имя", "Группа", "Модуль 1", "Модуль 2", "Рейтинг\n", "Обратный порядок", "Назад" };
 		options = options_sort_main;
 		break;
 
-	case FindSort:
-		print_List(findData); // Вывод заголовка
+	case FindSort:// Раздел сортировки найденных данных
+		print_List(findData); 
 		printf("\nВыберете пункты для сортировки:\n\n");
 		menu_size = 8;
 		static char* options_sort_find[] = { "ID", "Имя", "Группа", "Модуль 1", "Модуль 2", "Рейтинг\n", "Обратный порядок" , "Назад"};
 		options = options_sort_find;
 		break;
 
-	case Start:
+	case Start: // Раздел начального экрана
 		if (load_success)
 			printf("Пока данных нет\nИли случилась ошибка при загруске данных.\n\n");
 		if (save_success == 1)
@@ -59,14 +59,14 @@ void menu(int select, enum Menu page) {
 		options = options_start;
 		break;
 
-	case Exit:
+	case Exit: // Раздел выхода
 		printf("Вы уверены, что хотите выйти? Все несохранённые данные будут утерены!\n\n");
 		menu_size = 2;
 		static char* options_exit[] = { "Назад", "Выйти" };
 		options = options_exit;
 		break;
 
-	case DataOptions:
+	case DataOptions: // Раздел операций с  данными
 		print_List(mainData);
 		if (save_success == 1)
 			printf("\nОшибка сохранения!\n\n");
@@ -77,14 +77,14 @@ void menu(int select, enum Menu page) {
 		options = options_data;
 		break;
 
-	case Drop:
+	case Drop: // Раздел сброса данных
 		printf("Вы уверены, что хотите сбросить данные? Отменить изменения невозможно!\n\n");
 		menu_size = 2;
 		static char* options_drop[] = { "Назад", "Сбросить" };
 		options = options_drop;
 		break;
 
-	case Find:
+	case Find: // Раздел поиска данных
 		if (is_find == 1) {
 			printf("Найдены студенты по вашему запросу\n");
 			print_List(findData);
@@ -98,8 +98,8 @@ void menu(int select, enum Menu page) {
 		break;
 	}
 
-
-	for (int i = 0; i < menu_size; i++) {
+	
+	for (int i = 0; i < menu_size; i++) { // Вывод пунктов меню
 		if (i == select)
 			printf("-> %s\n", options[i]);
 		else
@@ -108,12 +108,12 @@ void menu(int select, enum Menu page) {
 }
 
 
-void find_menu() {
+void find_menu() { // Меню поиска данных
 	int select = 0;
 	int flag = 1;
 	while (flag) {
 		menu(select, Find);
-		if (move(&select)) { // Enter
+		if (move(&select)) { 
 			switch (select) {
 			case 0:
 				find_persons(ID);
@@ -147,12 +147,12 @@ void find_menu() {
 }
 
 
-void del_menu() {
+void del_menu() { // Меню удаления данных
 	int select = 0;
 	int flag = 1;
 	while (flag) {
 		menu(select, Del);
-		if (move(&select)) { // Enter
+		if (move(&select)) {
 			switch (select) {
 			case 0:
 				del_persons(ID);
@@ -189,12 +189,12 @@ void del_menu() {
 }
 
 
-void sort_menu_main() {
+void sort_menu_main() { // Меню сортировки основных данных
 	int select = 0;
 	int flag = 1;
 	while (flag) {
 		menu(select, MainSort);
-		if (move(&select)) { // Enter
+		if (move(&select)) { 
 			switch (select) {
 			case 0:
 				sort_persons(mainData, ID);
@@ -228,12 +228,12 @@ void sort_menu_main() {
 }
 
 
-void sort_menu_find() {
+void sort_menu_find() { // Меню сортировки найденных данных
 	int select = 0;
 	int flag = 1;
 	while (flag) {
 		menu(select, FindSort);
-		if (move(&select)) { // Enter
+		if (move(&select)) { 
 			switch (select) {
 			case 0:
 				sort_persons(findData, ID);
@@ -267,13 +267,13 @@ void sort_menu_find() {
 }
 
 
-void start_menu() {
+void start_menu() { // Меню главный экран
 	load_success = load_data();
 	int select = 0;
 	
 	while (1) {
 		menu(select, Start);
-		if (move(&select)) { // Enter
+		if (move(&select)) { 
 			switch (select) {
 				case 0:
 					data_menu();
@@ -295,7 +295,7 @@ void start_menu() {
 }
 
 
-void data_menu() {
+void data_menu() { // Меню опираций с данными
 	int select = 0;
 	int flag = 1;
 	while (flag) {
@@ -330,11 +330,11 @@ void data_menu() {
 }
 
 
-void exit_menu() {
+void exit_menu() { // Меню меню выхода
 	int select = 0;
 	while (1) {
 		menu(select, Exit);
-		if (move(&select)) { // Управление
+		if (move(&select)) { 
 			if (select == 0) {
 				break;
 			}
@@ -346,12 +346,12 @@ void exit_menu() {
 }
 
 
-void drop_menu() {
+void drop_menu() { // Меню сброса данных
 	int select = 0;
 	
 	while (1) {
 		menu(select, Drop);
-		if (move(&select)) { // Управление
+		if (move(&select)) { 
 			if (select == 0) {
 				break;
 			}
@@ -364,11 +364,11 @@ void drop_menu() {
 }
 
 
-void edit_menu() {
+void edit_menu() { // Меню изменения данных 
 	int select = 0;
 	int flag = 1;
 	Student* person;
-	while (1) {
+	while (1) { // Получение ID и всяческие проверки
 		system("cls");
 		printf("Для изменения информации о студенте введите его ID\n");
 		system("pause");
@@ -384,7 +384,7 @@ void edit_menu() {
 	findData->arr = person;
 	while (flag) {
 		menu(select, Edit);
-		if(move(&select)) { //Управление
+		if(move(&select)) {
 			switch (select) { 
 			case 0:
 				edit_ID(person, 1);
@@ -405,7 +405,7 @@ void edit_menu() {
 				edit_Rate(person, 1);
 				break;
 			case 6:
-				save_success = save_data(); // TODO: fData сохранять в дата
+				save_success = save_data();
 				break;
 			case 7:
 				flag = 0;
@@ -417,7 +417,7 @@ void edit_menu() {
 }
 
 
-int move(int* select) {
+int move(int* select) { // Управление меню
 	int key = _getch();
 	if (key == 224) { // Начало ввода с клавиатуры
 		key = _getch();

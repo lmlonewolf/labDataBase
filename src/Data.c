@@ -48,7 +48,7 @@ List* sum_lists(List* first, List* second) { // Суммируем списки
 	ui size = first->size + second->size;
 	List* ptr = calloc(1, sizeof(List));
 	ptr->size = size;
-	ptr->arr = calloc(size, sizeof(Student));
+	ptr->arr = calloc(size, sizeof(Student)); 
 	for (int i = 0; i < first->size; i++)
 		ptr->arr[i] = first->arr[i];
 	for (int i = 0; i < second->size; i++)
@@ -250,7 +250,7 @@ void find_persons(enum Column cl) {  // Поиск студентов в списке по условию
 }
 
 
-void del_persons(enum Column cl) {
+void del_persons(enum Column cl) { // Удаление людей по столбцам
 	system("cls");
 	int tempi;
 	char tempc[256];
@@ -327,7 +327,7 @@ void del_persons(enum Column cl) {
 }
 
 
-void sort_persons(List* data, enum Cloumn cl) {
+void sort_persons(List* data, enum Cloumn cl) { // Сортировка по столбцам
 	if (data->size < 2)
 		return NULL;
 	Student temp;
@@ -407,7 +407,7 @@ void sort_persons(List* data, enum Cloumn cl) {
 }
 
 
-void  revers_persons(List* data) {
+void  revers_persons(List* data) { // Инверсия списка студентов
 	if (data->size < 2)
 		return NULL;
 	Student temp;

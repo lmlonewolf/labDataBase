@@ -3,6 +3,7 @@
 
 // проверки?
 
+// Определение и инициализация глобальных переменных
 int menu_size = 0;
 us save_success = 2;
 us load_success = NULL;
@@ -15,7 +16,7 @@ int main() {
 	setlocale(LC_ALL, "");
 	SetConsoleCP(1251);
 
-	start_menu();
+	start_menu(); // Начало программы
 
 	return 0;
 }

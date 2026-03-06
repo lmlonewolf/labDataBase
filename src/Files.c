@@ -2,7 +2,7 @@
 #include <IO.h>
 
 
-int save_data(void) {
+int save_data(void) { // Сохранение main данных
 	FILE* file = fopen("data.dat", "wb");
 	int res = fwrite(mainData->arr, sizeof(Student), mainData->size, file);
 	fclose(file);
@@ -12,7 +12,7 @@ int save_data(void) {
 }
 
 
-int load_data(void) {
+int load_data(void) { // Считывание данных из файла в main данные и инициализация динамической памяти для данных
 	FILE* file = fopen("data.dat", "rb");
 	int desk = fileno(file);
 	size_t bsize = filelength(desk);
@@ -27,7 +27,7 @@ int load_data(void) {
 		return 1;
 	}
 	mainData->size = count;
-	// инициализируем структуру найденых данных
+	// Инициализируем структуру найденых данных
 	findData = calloc(1, sizeof(List));
 	findData->arr = NULL;
 	findData->size = NULL;

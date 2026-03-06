@@ -9,13 +9,13 @@
 #include <stdlib.h>
 
 
-struct Group {
+struct Group { // Структура группы
 	char name[32];
 	us year;
 	us number;
 };
 
-typedef struct {
+typedef struct { // Структура студента
 	ui id;
 	char name[256];
 	struct Group group;
@@ -23,13 +23,13 @@ typedef struct {
 	us m1, m2, rate;
 } Student;
 
-typedef struct {
+typedef struct { // Структура списка студентов
 	Student* arr;
 	ui size;
 } List;
 
 
-enum Menu {
+enum Menu { // Разделы меню
 	Start,
 	Edit,
 	Exit,
@@ -41,7 +41,7 @@ enum Menu {
 	FindSort
 };
 
-enum Column {
+enum Column { // Столбцы структуры студентов
 	ID,
 	Name,
 	Group,
@@ -100,9 +100,9 @@ int load_data(void);
 
 
 // Глобальные переменные
-extern int menu_size;
-extern us save_success;
-extern us load_success;
-extern List* mainData;
-extern int is_find;
-extern List* findData;
+extern int menu_size; // Количество пунктов меню
+extern int is_find; // Стутус поиска данных
+extern us save_success; // Статус сохранения данных
+extern us load_success; // Статус считывания данных
+extern List* mainData; // Указатель на динамическую память с основными данными
+extern List* findData; // Указатель на динамическую память с найденными данными
