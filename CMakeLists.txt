@@ -14,6 +14,11 @@ project ("DataBase")
 # Добавьте источник в исполняемый файл этого проекта.
 add_executable (DataBase "src/main.c" "src/Header.h" "src/Data.c" "src/Edit.c" "src/Menu.c" "src/Files.c" "src/Print.c" )
 
+set_target_properties(DataBase PROPERTIES
+    C_STANDARD 17
+    C_STANDARD_REQUIRED ON
+)
+
 if (CMAKE_VERSION VERSION_GREATER 3.12)
   set_property(TARGET DataBase PROPERTY CXX_STANDARD 20)
 endif()
