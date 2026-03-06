@@ -20,16 +20,16 @@ List* new_persons() { // Создания списка студентов
 		system("pause");
 	}
 	system("cls");
-	List* ptr = calloc(1, sizeof(List));
+	List* ptr = calloc(1, sizeof(List)); // Преобразуем массив студентов в список
 	*ptr = (List) { temp, size };
 	print_List(ptr);
 	return ptr;
 }
 
 
-int init_person(Student* person, int num) { // инициализация студентов
+int init_person(Student* person, int num) { // Инициализация студентов
 	system("cls");
-	if (num != 1) // для инициализации в списке
+	if (num != 1) // Для инициализации в списке
 		printf("Инициализация студента %d\n", num);
 	edit_ID(person, 0);
 	edit_Name(person, 0);
@@ -41,8 +41,8 @@ int init_person(Student* person, int num) { // инициализация студентов
 }
 
 
-List* sum_lists(List* first, List* second) {
-	if (second == NULL)
+List* sum_lists(List* first, List* second) { // Суммируем списки
+	if (second == NULL) // Проверка корректности новых данных
 		return first;
 	ui size = first->size + second->size;
 	List* ptr = calloc(1, sizeof(List));
@@ -60,7 +60,7 @@ List* sum_lists(List* first, List* second) {
 }
 
 
-void drop_data(List* data) {
+void drop_data(List* data) { // Сьрасываем данные по указателю, попутно очищая Кучу
 	if (data)
 		free(data->arr);
 	else
@@ -70,7 +70,7 @@ void drop_data(List* data) {
 }
 
 
-int input_id() {
+int input_id() { // Введение ID
 	int temp;
 	while (1) {
 		printf("\nВведите номер студенческого билета: ");
@@ -87,7 +87,7 @@ int input_id() {
 }
 
 
-void input_name(char* temp) {
+void input_name(char* temp) { // Введение имени
 	while (1) {
 		printf("\nВведите имя студента: ");
 		if (fgets(temp, 256, stdin) == NULL) {
@@ -104,7 +104,7 @@ void input_name(char* temp) {
 }
 
 
-void input_group(char* temp, short* year, short* number) {
+void input_group(char* temp, short* year, short* number) { // Введение группы
 	while (1) {
 		printf("\nВведите группу студента по образцу ИДБ-25-00: ");
 		if (scanf_s(" %[^-]-%hd-%hd", temp, (unsigned int)sizeof(temp), year, number) != 3) {
@@ -131,7 +131,7 @@ void input_group(char* temp, short* year, short* number) {
 }
 
 
-int input_modul(int num) {
+int input_modul(int num) { // Введение модуля
 	int temp;
 	while (1) {
 		if (num == 0)
@@ -155,7 +155,7 @@ int input_modul(int num) {
 }
 
 
-void find_persons(enum Column cl) {
+void find_persons(enum Column cl) {  // Поиск студентов в списке по условию
 	system("cls");
 	drop_data(findData);
 	findData->size = 0;
@@ -163,7 +163,7 @@ void find_persons(enum Column cl) {
 	int tempi;
 	char tempc[256];
 	is_find = 0;
-	switch (cl) {
+	switch (cl) { // Раздел поиска
 		case ID:
 			tempi = input_id();
 			ui el;
@@ -230,7 +230,7 @@ void find_persons(enum Column cl) {
 			}
 			break;
 	}
-	if (findData->size == 0)
+	if (findData->size == 0) // Возвращаем указатель на список найденых студентов
 		is_find++;
 	findData->arr = realloc(findData->arr, findData->size * sizeof(Student));
 	is_find++;
