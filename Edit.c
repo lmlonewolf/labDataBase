@@ -6,10 +6,10 @@
 Student* find_to_edit() {
 	int temp = input_id();
 	ui el;
-	for (int i = 0; i < Data->size; i++) {
-		el = Data->arr[i].id;
+	for (int i = 0; i < mainData->size; i++) {
+		el = mainData->arr[i].id;
 		if (el == temp)
-			return &Data->arr[i];
+			return &mainData->arr[i];
 	}
 	return NULL;
 }

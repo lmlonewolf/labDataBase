@@ -12,8 +12,8 @@ int menu_size = 0;
 us save_success = 2;
 us load_success = NULL;
 int is_find = 0;
-List* Data;
-List* fData;
+List* mainData;
+List* findData;
 
 int main() {
 	setlocale(LC_ALL, "");

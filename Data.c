@@ -155,12 +155,11 @@ int input_modul(int num) {
 }
 
 
-
 void find_persons(enum Column cl) {
 	system("cls");
-	drop_data(fData);
-	fData->size = 0;
-	fData->arr = calloc(Data->size, sizeof(Student));
+	drop_data(findData);
+	findData->size = 0;
+	findData->arr = calloc(mainData->size, sizeof(Student));
 	int tempi;
 	char tempc[256];
 	is_find = 0;
@@ -168,21 +167,21 @@ void find_persons(enum Column cl) {
 		case ID:
 			tempi = input_id();
 			ui el;
-			for (int i = 0; i < Data->size; i++) {
-				el = Data->arr[i].id;
+			for (int i = 0; i < mainData->size; i++) {
+				el = mainData->arr[i].id;
 				if (el == tempi) {
-					fData->arr[fData->size] = Data->arr[i];
-					fData->size++;
+					findData->arr[findData->size] = mainData->arr[i];
+					findData->size++;
 				}
 			}
 			break;
 
 		case Name:
 			input_name(tempc);
-			for (int i = 0; i < Data->size; i++) {
-				if (strcmp(Data->arr[i].name, tempc) == 0) {
-					fData->arr[fData->size] = Data->arr[i];
-					fData->size++;
+			for (int i = 0; i < mainData->size; i++) {
+				if (strcmp(mainData->arr[i].name, tempc) == 0) {
+					findData->arr[findData->size] = mainData->arr[i];
+					findData->size++;
 				}
 			}
 			break;
@@ -190,50 +189,50 @@ void find_persons(enum Column cl) {
 		case Group:
 			short year, number;
 			input_group(tempc, &year, &number);
-			for (int i = 0; i < Data->size; i++) {
-				if ((strcmp(Data->arr[i].group.name, tempc) == 0) && (Data->arr[i].group.number == number) && (Data->arr[i].group.year == year)) {
-					fData->arr[fData->size] = Data->arr[i];
-					fData->size++;
+			for (int i = 0; i < mainData->size; i++) {
+				if ((strcmp(mainData->arr[i].group.name, tempc) == 0) && (mainData->arr[i].group.number == number) && (mainData->arr[i].group.year == year)) {
+					findData->arr[findData->size] = mainData->arr[i];
+					findData->size++;
 				}
 			}
 			break;
 
 		case M1:
 			tempi = input_modul(1);
-			for (int i = 0; i < Data->size; i++) {
-				el = Data->arr[i].m1;
+			for (int i = 0; i < mainData->size; i++) {
+				el = mainData->arr[i].m1;
 				if (el == tempi) {
-					fData->arr[fData->size] = Data->arr[i];
-					fData->size++;
+					findData->arr[findData->size] = mainData->arr[i];
+					findData->size++;
 				}
 			}
 			break;
 
 		case M2:
 			tempi = input_modul(2);
-			for (int i = 0; i < Data->size; i++) {
-				el = Data->arr[i].m2;
+			for (int i = 0; i < mainData->size; i++) {
+				el = mainData->arr[i].m2;
 				if (el == tempi) {
-					fData->arr[fData->size] = Data->arr[i];
-					fData->size++;
+					findData->arr[findData->size] = mainData->arr[i];
+					findData->size++;
 				}
 			}
 			break;
 
 		case Rate:
 			tempi = input_modul(0);
-			for (int i = 0; i < Data->size; i++) {
-				el = Data->arr[i].rate;
+			for (int i = 0; i < mainData->size; i++) {
+				el = mainData->arr[i].rate;
 				if (el == tempi) {
-					fData->arr[fData->size] = Data->arr[i];
-					fData->size++;
+					findData->arr[findData->size] = mainData->arr[i];
+					findData->size++;
 				}
 			}
 			break;
 	}
-	if (fData->size == 0)
+	if (findData->size == 0)
 		is_find++;
-	fData->arr = realloc(fData->arr, fData->size * sizeof(Student));
+	findData->arr = realloc(findData->arr, findData->size * sizeof(Student));
 	is_find++;
 }
 
@@ -247,69 +246,160 @@ void del_persons(enum Column cl) {
 	case ID:
 		tempi = input_id();
 		ui el;
-		for (int i = 0; i < Data->size; i++) {
-			el = Data->arr[i].id;
+		for (int i = 0; i < mainData->size; i++) {
+			el = mainData->arr[i].id;
 			if (el == tempi)
 				deleted++;
 			else
-				Data->arr[i - deleted] = Data->arr[i];
+				mainData->arr[i - deleted] = mainData->arr[i];
 		}
 		break;
 
 	case Name:
 		input_name(tempc);
-		for (int i = 0; i < Data->size; i++) {
-			if (strcmp(Data->arr[i].name, tempc) == 0)
+		for (int i = 0; i < mainData->size; i++) {
+			if (strcmp(mainData->arr[i].name, tempc) == 0)
 				deleted++;
 			else
-				Data->arr[i - deleted] = Data->arr[i];
+				mainData->arr[i - deleted] = mainData->arr[i];
 		}
 		break;
 
 	case Group:
 		short year, number;
 		input_group(tempc, &year, &number);
-		for (int i = 0; i < Data->size; i++) {
-			if ((strcmp(Data->arr[i].group.name, tempc) == 0) && (Data->arr[i].group.number == number) && (Data->arr[i].group.year == year))
+		for (int i = 0; i < mainData->size; i++) {
+			if ((strcmp(mainData->arr[i].group.name, tempc) == 0) && (mainData->arr[i].group.number == number) && (mainData->arr[i].group.year == year))
 				deleted++;
 			else
-				Data->arr[i - deleted] = Data->arr[i];
+				mainData->arr[i - deleted] = mainData->arr[i];
 		}
 		break;
 
 	case M1:
 		tempi = input_modul(1);
-		for (int i = 0; i < Data->size; i++) {
-			el = Data->arr[i].m1;
+		for (int i = 0; i < mainData->size; i++) {
+			el = mainData->arr[i].m1;
 			if (el == tempi)
 				deleted++;
 			else
-				Data->arr[i - deleted] = Data->arr[i];
+				mainData->arr[i - deleted] = mainData->arr[i];
 		}
 		break;
 
 	case M2:
 		tempi = input_modul(2);
-		for (int i = 0; i < Data->size; i++) {
-			el = Data->arr[i].m2;
+		for (int i = 0; i < mainData->size; i++) {
+			el = mainData->arr[i].m2;
 			if (el == tempi)
 				deleted++;
 			else
-				Data->arr[i - deleted] = Data->arr[i];
+				mainData->arr[i - deleted] = mainData->arr[i];
 		}
 		break;
 
 	case Rate:
 		tempi = input_modul(0);
-		for (int i = 0; i < Data->size; i++) {
-			el = Data->arr[i].rate;
+		for (int i = 0; i < mainData->size; i++) {
+			el = mainData->arr[i].rate;
 			if (el == tempi)
 				deleted++;
 			else
-				Data->arr[i - deleted] = Data->arr[i];
+				mainData->arr[i - deleted] = mainData->arr[i];
 		}
 		break;
 	}
-	Data->size -= deleted;
-	Data->arr = realloc(Data->arr, Data->size * sizeof(Student));
+	mainData->size -= deleted;
+	mainData->arr = realloc(mainData->arr, mainData->size * sizeof(Student));
+}
+
+
+void sort_persons(List* data, enum Cloumn cl) {
+	if (data->size < 2)
+		return NULL;
+	Student temp;
+	switch (cl) {
+	case ID:
+		for (int i = 0; i < data->size - 1; i++) {
+			for (int j = 0; j < data->size - i - 1; j++) {
+				if (data->arr[j].id > data->arr[j + 1].id) {
+					temp = data->arr[j];
+					data->arr[j] = data->arr[j + 1];
+					data->arr[j + 1] = temp;
+				}
+			}
+		}
+		break;
+
+	case Name:
+		for (int i = 0; i < data->size - 1; i++) {
+			for (int j = 0; j < data->size - i - 1; j++) {
+				if (strcmp(data->arr[j].name, data->arr[j + 1].name) > 0) {
+					temp = data->arr[j];
+					data->arr[j] = data->arr[j + 1];
+					data->arr[j + 1] = temp;
+				}
+			}
+		}
+		break;
+
+	case Group:
+		for (int i = 0; i < data->size - 1; i++) {
+			for (int j = 0; j < data->size - i - 1; j++) {
+				if (strcmp(data->arr[j].groupstr, data->arr[j + 1].groupstr) > 0) {
+					temp = data->arr[j];
+					data->arr[j] = data->arr[j + 1];
+					data->arr[j + 1] = temp;
+				}
+			}
+		}
+		break;
+
+	case M1:
+		for (int i = 0; i < data->size - 1; i++) {
+			for (int j = 0; j < data->size - i - 1; j++) {
+				if (data->arr[j].m1 > data->arr[j + 1].m1) {
+					temp = data->arr[j];
+					data->arr[j] = data->arr[j + 1];
+					data->arr[j + 1] = temp;
+				}
+			}
+		}
+		break;
+
+	case M2:
+		for (int i = 0; i < data->size - 1; i++) {
+			for (int j = 0; j < data->size - i - 1; j++) {
+				if (data->arr[j].m2 > data->arr[j + 1].m2) {
+					temp = data->arr[j];
+					data->arr[j] = data->arr[j + 1];
+					data->arr[j + 1] = temp;
+				}
+			}
+		}
+		break;
+
+	case Rate:
+		for (int i = 0; i < data->size - 1; i++) {
+			for (int j = 0; j < data->size - i - 1; j++) {
+				if (data->arr[j].rate > data->arr[j + 1].rate) {
+					temp = data->arr[j];
+					data->arr[j] = data->arr[j + 1];
+					data->arr[j + 1] = temp;
+				}
+			}
+		}
+		break;
+	}
+}
+
+void  revers_persons(List* data) {
+	if (data->size < 2)
+		return NULL;
+	Student temp;
+	for (int i = 0; i < data->size / 2; i++) {
+		temp = data->arr[i];
+		data->arr[i] = data->arr[data->size - i - 1];
+		data->arr[data->size - i - 1] = temp;
+	}
 }

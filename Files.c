@@ -3,9 +3,9 @@
 
 int save_data(void) {
 	FILE* file = fopen("data.dat", "wb");
-	int res = fwrite(Data->arr, sizeof(Student), Data->size, file);
+	int res = fwrite(mainData->arr, sizeof(Student), mainData->size, file);
 	fclose(file);
-	if (res != Data->size)
+	if (res != mainData->size)
 		return 1;
 	return 0;
 }
@@ -16,20 +16,20 @@ int load_data(void) {
 	int desk = fileno(file);
 	size_t bsize = filelength(desk);
 	ui count = bsize / sizeof(Student);
-	Data = calloc(1, sizeof(List));
-	Data->arr = calloc(count, sizeof(Student));
-	int res = fread(Data->arr, sizeof(Student), count, file);
+	mainData = calloc(1, sizeof(List));
+	mainData->arr = calloc(count, sizeof(Student));
+	int res = fread(mainData->arr, sizeof(Student), count, file);
 	fclose(file);
 	if ((res != count) || (count == 0)){
-		Data->arr = NULL;
-		Data->size = NULL;
+		mainData->arr = NULL;
+		mainData->size = NULL;
 		return 1;
 	}
-	Data->size = count;
+	mainData->size = count;
 	// инициализируем структуру найденых данных
-	fData = calloc(1, sizeof(List));
-	fData->arr = NULL;
-	fData->size = NULL;
+	findData = calloc(1, sizeof(List));
+	findData->arr = NULL;
+	findData->size = NULL;
 	return 0;
 }
 

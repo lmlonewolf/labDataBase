@@ -36,7 +36,9 @@ enum Menu {
 	Find,
 	DataOptions,
 	Drop,
-	Del
+	Del,
+	MainSort,
+	FindSort
 };
 
 
@@ -58,6 +60,9 @@ void exit_menu(void);
 void start_menu(void);
 void data_menu(void);
 void drop_menu(void);
+void find_menu(void);
+void sort_menu_main(void);
+void sort_menu_find(void);
 int move(int* select);
 Student* find_to_edit(void);
 
@@ -87,7 +92,8 @@ List* sum_lists(List* first, List* second);
 void drop_data(List* data);
 void find_persons(enum Column cl);
 void del_persons(enum Column cl);
-
+void sort_persons(List* data, enum Cloumn cl);
+void  revers_persons(List* data);
 
 // Функции работы с файлами
 int save_data(void);
@@ -99,6 +105,6 @@ int load_data(void);
 extern int menu_size;
 extern us save_success;
 extern us load_success;
-extern List* Data;
+extern List* mainData;
 extern int is_find;
-extern List* fData;
+extern List* findData;
