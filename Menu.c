@@ -303,7 +303,7 @@ void data_menu() {
 		if (move(&select)) {
 			switch (select) {
 			case 0:
-				mainData = sum_lists(mainData, new_persons()); //TODO: добавить функции
+				mainData = sum_lists(mainData, new_persons()); // Создать список студентов и добавить в mainData
 				break;
 			case 1:
 				del_menu(); 

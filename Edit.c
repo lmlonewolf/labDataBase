@@ -2,7 +2,6 @@
 #include <ctype.h>
 
 
-
 Student* find_to_edit() {
 	int temp = input_id();
 	ui el;

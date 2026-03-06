@@ -1,7 +1,7 @@
 #include "Header.h"
 
 
-List* new_persons() {
+List* new_persons() { // Создания списка студентов
 	system("cls");
 	printf("Введите необходимое число строк для добавления: ");
 	ui size;
@@ -9,25 +9,25 @@ List* new_persons() {
 		printf("\nПроизошла ошибка(\nПопробуйте ещё раз\n");
 		return NULL;
 	}
-	Student* arr = calloc(size, sizeof(Student)); // Создать массив студентов нужного размера
-	if (arr == NULL) {
+	Student* temp = calloc(size, sizeof(Student)); // Создать массив студентов нужного размера
+	if (temp == NULL) {
 		printf("\nНе удалось выделить память");
 		return NULL;
 	}
 	for (int i = 0; i < size; i++) {
-		init_person(&arr[i], i + 1);
+		init_person(&temp[i], i + 1);
 		putchar('\n');
 		system("pause");
 	}
 	system("cls");
 	List* ptr = calloc(1, sizeof(List));
-	*ptr = (List) { arr, size };
+	*ptr = (List) { temp, size };
 	print_List(ptr);
 	return ptr;
 }
 
 
-int init_person(Student* person, int num) { 
+int init_person(Student* person, int num) { // инициализация студентов
 	system("cls");
 	if (num != 1) // для инициализации в списке
 		printf("Инициализация студента %d\n", num);
@@ -42,6 +42,8 @@ int init_person(Student* person, int num) {
 
 
 List* sum_lists(List* first, List* second) {
+	if (second == NULL)
+		return first;
 	ui size = first->size + second->size;
 	List* ptr = calloc(1, sizeof(List));
 	ptr->size = size;
