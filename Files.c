@@ -1,6 +1,7 @@
 #include "Header.h"
 #include <IO.h>
 
+
 int save_data(void) {
 	FILE* file = fopen("data.dat", "wb");
 	int res = fwrite(mainData->arr, sizeof(Student), mainData->size, file);
@@ -32,4 +33,3 @@ int load_data(void) {
 	findData->size = NULL;
 	return 0;
 }
-

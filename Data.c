@@ -1,8 +1,6 @@
 #include "Header.h"
 
 
-
-
 List* new_persons() {
 	system("cls");
 	printf("Введите необходимое число строк для добавления: ");
@@ -392,6 +390,7 @@ void sort_persons(List* data, enum Cloumn cl) {
 		break;
 	}
 }
+
 
 void  revers_persons(List* data) {
 	if (data->size < 2)

@@ -41,7 +41,6 @@ enum Menu {
 	FindSort
 };
 
-
 enum Column {
 	ID,
 	Name,
@@ -98,7 +97,6 @@ void  revers_persons(List* data);
 // Функции работы с файлами
 int save_data(void);
 int load_data(void);
-
 
 
 // Глобальные переменные

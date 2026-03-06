@@ -268,6 +268,7 @@ void sort_menu_find() {
 
 
 void start_menu() {
+	load_success = load_data();
 	int select = 0;
 	
 	while (1) {
