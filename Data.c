@@ -61,10 +61,12 @@ List* sum_lists(List* first, List* second) {
 
 
 void drop_data(List* data) {
-		if (data)
-			free(data->arr);
-		data->arr = NULL;
-		data->size = NULL;
+	if (data)
+		free(data->arr);
+	else
+		data = calloc(1, sizeof(List));
+	data->arr = NULL;
+	data->size = NULL;
 }
 
 
@@ -161,7 +163,7 @@ void find_persons(enum Column cl) {
 	fData->arr = calloc(Data->size, sizeof(Student));
 	int tempi;
 	char tempc[256];
-
+	is_find = 0;
 	switch (cl) {
 		case ID:
 			tempi = input_id();
