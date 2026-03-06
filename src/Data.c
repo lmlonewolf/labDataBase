@@ -7,12 +7,12 @@ List* new_persons() { // Создания списка студентов
 	printf("Введите необходимое число строк для добавления: ");
 	ui size;
 	if (scanf_s("%d", &size) == 0) {
-		printf("\nПроизошла ошибка(\nПопробуйте ещё раз\n");
+		printf("\033[0;31mПроизошла ошибка! Попробуйте ещё раз.\033[0m\n\n");;
 		return NULL;
 	}
 	Student* temp = calloc(size, sizeof(Student)); // Создать массив студентов нужного размера
 	if (temp == NULL) {
-		printf("\nНе удалось выделить память");
+		printf("\033[0;31mНе удалось выделить память\033[0m\n\n");
 		return NULL;
 	}
 	for (int i = 0; i < size; i++) {
@@ -31,7 +31,7 @@ List* new_persons() { // Создания списка студентов
 int init_person(Student* person, int num) { // Инициализация студентов
 	system("cls");
 	if (num != 1) // Для инициализации в списке
-		printf("Инициализация студента %d\n", num);
+		printf("Инициализация студента \n", num);
 	edit_ID(person, 0);
 	edit_Name(person, 0);
 	edit_Group(person, 0);
@@ -87,11 +87,11 @@ int input_id() { // Введение ID
 	while (1) {
 		printf("\nВведите номер студенческого билета: ");
 		if (scanf_s("%d", &temp) == 0) {
-			printf("Ошибка ввода! Попробуйте ещё раз.\n\n");
+			printf("\033[0;31mОшибка ввода! Попробуйте ещё раз.\033[0m\n\n");
 			continue;
 		}
 		if ((temp < 100'000) || (temp >= 1'000'000))
-			printf("Ошибка ввода! Попробуйте ещё раз.\n\n");
+			printf("\033[0;31mОшибка ввода! Попробуйте ещё раз.\033[0m\n\n");
 		else
 			break;
 	}
@@ -104,12 +104,12 @@ void input_name(char* temp) { // Введение имени
 	while (1) {
 		printf("\nВведите имя студента: ");
 		if ((fgets(temp, 256, stdin) == NULL) || (str_is_alpha(temp, 1))) {
-			printf("Ошибка ввода! Попробуйте ещё раз.\n\n");
+			printf("\033[0;31mОшибка ввода! Попробуйте ещё раз.\033[0m\n\n");
 			continue;
 		}
 		int l = strlen(temp);
 		if (strlen(temp) > 32 || strlen(temp) < 2)
-			printf("\nНедопустимая длина. Попробуйте ещё раз.\n\n");
+			printf("\033[0;31mНедопустимая длина! Попробуйте ещё раз.\033[0m\n\n");
 		else
 			break;
 	}
@@ -121,19 +121,19 @@ void input_group(char* temp, short* year, short* number) { // Введение группы
 	while (1) {
 		printf("\nВведите группу студента по образцу ИДБ-25-00: ");
 		if ((scanf_s(" %[^-]-%hd-%hd", temp, (unsigned int)sizeof(temp), year, number) != 3) || (str_is_alpha(temp, 0))) {
-			printf("\nОшибка формата ввода! Попробуйте ещё раз.\n");
+			printf("\033[0;31mОшибка формата ввода! Попробуйте ещё раз.\033[0m\n\n");
 			continue;
 		}
 		if (strlen(temp) != 3) {
-			printf("Ошибка в буквеной части. Попробуйте ещё раз.\n\n");
+			printf("\033[0;31mОшибка в буквенной части! Попробуйте ещё раз.\033[0m\n\n");
 			continue;
 		}
 		else if (*year < 0) {
-			printf("Ошибка в годе группы. Попробуйте ещё раз.\n\n");
+			printf("\033[0;31mОшибка в годе группы! Попробуйте ещё раз.\033[0m\n\n");
 			continue;
 		}
 		else if ((*number < 1) || (*number >= 100)) {
-			printf("Ошибка в номере группы. Попробуйте ещё раз.\n\n");
+			printf("\033[0;31mОшибка в номере группы! Попробуйте ещё раз.\033[0m\n\n");
 			continue;
 		}
 		else
@@ -152,7 +152,7 @@ int input_modul(int num) { // Введение модуля
 		else
 			printf("\nВведите результат Модуля %d: ", num);
 		if (scanf_s("%d", &temp) == 0) {
-			printf("Ошибка ввода! Попробуйте ещё раз.\n\n");
+			printf("\033[0;31mОшибка ввода! Попробуйте ещё раз.\033[0m\n\n");
 			continue;
 		}
 		if (temp == 0) {
@@ -160,7 +160,7 @@ int input_modul(int num) { // Введение модуля
 			break;
 		}
 		if ((temp > 100) || (temp < 25))
-			printf("Ошибка ввода! Попробуйте ещё раз.\n\n");
+			printf("\033[0;31mОшибка ввода! Попробуйте ещё раз.\033[0m\n\n");
 		else
 			break;
 	}

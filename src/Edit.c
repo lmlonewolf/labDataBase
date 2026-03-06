@@ -73,7 +73,7 @@ void edit_Rate(Student* person, int flag) { // Изменить рейтинг
 		person->rate = input_modul(0);
 	}
 	else {
-		printf("\nМодули не закрыты! Поэтому итоговой оценки нет.\n");
+		printf("\n\033[0;31mМодули не закрыты! Поэтому итоговой оценки нет.\033[0m\n");
 		person->rate = NULL;
 	}
 }
