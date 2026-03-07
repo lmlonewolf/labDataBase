@@ -104,7 +104,7 @@ void input_name(char* temp) { // ¬ведение имени
 	while (1) {
 		if (!flag_zero_input)
 			printf("\n¬ведите им€ студента: ");
-		char c = getchar();
+		char c = getchar(); // ћного защит ввода
 		if (c == '\n') {
 			flag_zero_input = 1;
 			continue;

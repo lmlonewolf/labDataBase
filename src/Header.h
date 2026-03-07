@@ -104,7 +104,7 @@ extern int menu_size; // Количество пунктов меню
 extern int is_find; // Стутус поиска данных
 extern us save_success; // Статус сохранения данных
 extern us load_success; // Статус считывания данных
-extern us count_deleted;
-extern us deleted;
+extern us count_deleted; // Счётчик удалённых студентов студентов зв сессию
+extern us deleted; // Счётчик удалённых студентов за одну операцию
 extern List* mainData; // Указатель на динамическую память с основными данными
 extern List* findData; // Указатель на динамическую память с найденными данными
