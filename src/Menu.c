@@ -12,6 +12,13 @@ void menu(int select, enum Menu page) { // Функция меню
 			printf("\n\033[1;31mОшибка сохранения!\033[0m\n\n");
 		else if (save_success == 0)
 			printf("\n\033[1;32mУспешно сохранено!\033[0m\n\n");
+		if (count_deleted == 0)
+			printf("Вы сегодня ещё никого не отчислили( Надо поднажать!\n\n");
+		else if (count_deleted % 10 == 1)
+			printf("Сегодня вы отчислили %d студента. Так держать!\n\n", count_deleted);
+		else
+			printf("Сегодня вы отчислили %d студентов. Так держать!\n\n", count_deleted);
+
 		print_List(mainData); 
 		printf("\nВыберете пункт по которым будите удалять студентов:\n\n");
 		menu_size = 9;
@@ -174,6 +181,7 @@ void del_menu() { // Меню удаления данных
 				break;
 			case 6:
 				load_success = load_data();
+				count_deleted -= deleted;
 				break;
 			case 7:
 				save_success = save_data();
@@ -374,7 +382,7 @@ void edit_menu() { // Меню изменения данных
 		system("pause");
 		person = find_to_edit();
 		if (person == NULL) {
-			printf("\033[1mСтудент с данным ID не найден. Попробуйте ещё раз.\033[0m\n");
+			printf("\033[0;31mСтудент с данным ID не найден. Попробуйте ещё раз.\033[0m\n");
 			system("pause");
 		}
 		else

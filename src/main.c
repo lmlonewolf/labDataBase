@@ -7,6 +7,8 @@
 int menu_size = 0;
 us save_success = 2;
 us load_success = NULL;
+us count_deleted = 0;
+us deleted = 0;
 int is_find = 0;
 List* mainData;
 List* findData;

@@ -100,20 +100,42 @@ int input_id() { // Введение ID
 
 
 void input_name(char* temp) { // Введение имени
-	getchar();
+	int flag_zero_input = 0;
 	while (1) {
-		printf("\nВведите имя студента: ");
-		if ((fgets(temp, 256, stdin) == NULL) || (str_is_alpha(temp, 1))) {
+		if (!flag_zero_input)
+			printf("\nВведите имя студента: ");
+		char c = getchar();
+		if (c == '\n') {
+			flag_zero_input = 1;
+			continue;
+		}
+		flag_zero_input = 0;
+		if (fgets(temp, 256, stdin) == NULL) {
 			printf("\033[0;31mОшибка ввода! Попробуйте ещё раз.\033[0m\n\n");
 			continue;
 		}
-		int l = strlen(temp);
-		if (strlen(temp) > 32 || strlen(temp) < 2)
+		us count_space = 0;
+		us len = strlen(temp);
+
+		for (int i = len; i >= 0; i--) {
+			if (temp[i] == ' ')
+				count_space++;
+			else if (temp[i] == '\n')
+				continue;
+			temp[i + 1] = temp[i];
+		}
+		temp[0] = c;
+
+		if (str_is_alpha(temp, 1) || (len == count_space)) {
+			printf("\033[0;31mОшибка ввода! Попробуйте ещё раз.\033[0m\n\n");
+			continue;
+		}
+		if ((len - count_space) > 32 || (len - count_space) < 2)
 			printf("\033[0;31mНедопустимая длина! Попробуйте ещё раз.\033[0m\n\n");
 		else
 			break;
 	}
-	temp[strlen(temp) - 1] = '\0';
+	return NULL;
 }
 
 
@@ -254,7 +276,7 @@ void del_persons(enum Column cl) { // Удаление людей по столбцам
 	system("cls");
 	int tempi;
 	char tempc[256];
-	int deleted = 0;
+	deleted = 0;
 	switch (cl) {
 	case ID:
 		tempi = input_id();
@@ -324,6 +346,7 @@ void del_persons(enum Column cl) { // Удаление людей по столбцам
 	}
 	mainData->size -= deleted;
 	mainData->arr = realloc(mainData->arr, mainData->size * sizeof(Student));
+	count_deleted += deleted;
 }
 
 
