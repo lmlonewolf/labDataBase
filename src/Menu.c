@@ -9,32 +9,32 @@ void menu(int select, enum Menu page) { // Функция меню
 	switch (page) { // Выбор раздела меню
 	case Del: // Раздел удаления данных
 		if (save_success == 1)
-			printf("\n\033[1;31mОшибка сохранения!\033[0m\n\n");
+			printf("\n\033[0;31mОшибка сохранения!\033[0m\n\n");
 		else if (save_success == 0)
-			printf("\n\033[1;32mУспешно сохранено!\033[0m\n\n");
+			printf("\n\033[0;32mУспешно сохранено!\033[0m\n\n");
 		if (count_deleted == 0)
-			printf("Вы сегодня ещё никого не отчислили( Надо поднажать!\n\n");
+			printf("\033[0;31mВы сегодня ещё никого не отчислили( Надо поднажать!\033[0m\n\n");
 		else if (count_deleted % 10 == 1)
-			printf("Сегодня вы отчислили %d студента. Так держать!\n\n", count_deleted);
+			printf("\033[0;32mСегодня вы отчислили %d студента. Так держать!\033[0m\n\n", count_deleted);
 		else
-			printf("Сегодня вы отчислили %d студентов. Так держать!\n\n", count_deleted);
+			printf("\033[0;32mСегодня вы отчислили %d студентов. Так держать!\033[0m\n\n", count_deleted);
 
 		print_List(mainData); 
 		printf("\nВыберете пункт по которым будите удалять студентов:\n\n");
 		menu_size = 9;
-		static char* options_del[] = { "ID", "Имя", "Группа", "Модуль 1", "Модуль 2", "Рейтинг\n", "\033[1;37mОтменить\033[0m", "\033[1;32mСохранить\033[0m", "\033[1;31mНазад\033[0m" };
+		static char* options_del[] = { "ID", "Имя", "Группа", "Модуль 1", "Модуль 2", "Рейтинг\n", "\033[0;37mОтменить (До последнего сохранения)\033[0m", "\033[0;32mСохранить\033[0m", "\033[0;31mНазад\033[0m" };
 		options = options_del;
 		break;
 
 	case Edit: // Раздел изменения данных
 		if (save_success == 1)
-			printf("\n\033[1;31mОшибка сохранения!\033[0m\n\n");
+			printf("\n\033[0;31mОшибка сохранения!\033[0m\n\n");
 		else if (save_success == 0)
-			printf("\n\033[1;32mУспешно сохранено!\033[0m\n\n");
+			printf("\n\033[0;32mУспешно сохранено!\033[0m\n\n");
 		print_Person(&findData->arr[0]); 
 		printf("\nВыберете пункты для изменения:\n\n");
 		menu_size = 8;
-		static char* options_edit[] = { "ID", "Имя", "Группа", "Модуль 1", "Модуль 2", "Рейтинг\n", "\033[1;32mСохранить\033[0m", "\033[1;31mНазад\033[0m"};
+		static char* options_edit[] = { "ID", "Имя", "Группа", "Модуль 1", "Модуль 2", "Рейтинг\n", "\033[0;32mСохранить\033[0m", "\033[0;31mНазад\033[0m"};
 		options = options_edit;
 		break;
 		
@@ -42,7 +42,7 @@ void menu(int select, enum Menu page) { // Функция меню
 		print_List(mainData); 
 		printf("\nВыберете пункты для сортировки:\n\n");
 		menu_size = 8;
-		static char* options_sort_main[] = { "ID", "Имя", "Группа", "Модуль 1", "Модуль 2", "Рейтинг\n", "\033[1;37mОбратный порядок\033[0m", "\033[1;31mНазад\033[0m" };
+		static char* options_sort_main[] = { "ID", "Имя", "Группа", "Модуль 1", "Модуль 2", "Рейтинг\n", "\033[0;37mОбратный порядок\033[0m", "\033[0;31mНазад\033[0m" };
 		options = options_sort_main;
 		break;
 
@@ -50,44 +50,44 @@ void menu(int select, enum Menu page) { // Функция меню
 		print_List(findData); 
 		printf("\nВыберете пункты для сортировки:\n\n");
 		menu_size = 8;
-		static char* options_sort_find[] = { "ID", "Имя", "Группа", "Модуль 1", "Модуль 2", "Рейтинг\n", "\033[1;37mОбратный порядок\033[0m" , "\033[1;31mНазад\033[0m"};
+		static char* options_sort_find[] = { "ID", "Имя", "Группа", "Модуль 1", "Модуль 2", "Рейтинг\n", "\033[0;37mОбратный порядок\033[0m" , "\033[0;31mНазад\033[0m"};
 		options = options_sort_find;
 		break;
 
 	case Start: // Раздел начального экрана
 		if (load_success)
-			printf("\033[1;31mПока данных нет\nИли случилась ошибка при загруске данных.\033[0m\n\n");
+			printf("\033[0;31mПока данных нет\nИли случилась ошибка при загруске данных.\033[0m\n\n");
 		if (save_success == 1)
-			printf("\n\033[1;31mОшибка сохранения!\033[0m\n\n");
+			printf("\n\033[0;31mОшибка сохранения!\033[0m\n\n");
 		else if (save_success == 0)
-			printf("\n\033[1;32mУспешно сохранено!\033[0m\n\n");
-		menu_size = 4;
-		static char* options_start[] = { "Список студентов", "Сбросить данные", "\033[1;32mСохранить\033[0m", "\033[1;31mВыход\033[0m" };
+			printf("\n\033[0;32mУспешно сохранено!\033[0m\n\n");
+		menu_size = 5;
+		static char* options_start[] = { "Список студентов", "Сбросить данные", "\033[0;32mСохранить\033[0m", "\033[0;34mЗагрузить сохранение\033[0m", "\033[0;31mВыход\033[0m" };
 		options = options_start;
 		break;
 
 	case Exit: // Раздел выхода
 		printf("Вы уверены, что хотите выйти? Все несохранённые данные будут утерены!\n\n");
 		menu_size = 2;
-		static char* options_exit[] = { "\033[1;34mНазад\033[0m", "\033[1;31mВыход\033[0m" };
+		static char* options_exit[] = { "\033[0;34mНазад\033[0m", "\033[0;31mВыход\033[0m" };
 		options = options_exit;
 		break;
 
 	case DataOptions: // Раздел операций с  данными
 		print_List(mainData);
 		if (save_success == 1)
-			printf("\n\033[1;31mОшибка сохранения!\033[0m\n\n");
+			printf("\n\033[0;31mОшибка сохранения!\033[0m\n\n");
 		else if (save_success == 0)
-			printf("\n\033[1;32mУспешно сохранено!\033[0m\n\n");
+			printf("\n\033[0;32mУспешно сохранено!\033[0m\n\n");
 		menu_size = 7;
-		static char* options_data[] = { "Добавить студентов", "Удалить студентов", "Сортировать", "Поиск", "Изменить\n", "\033[1;32mСохранить\033[0m", "\033[1;31mНазад\033[0m"};
+		static char* options_data[] = { "Добавить студентов", "Удалить студентов", "Сортировать", "Поиск", "Изменить\n", "\033[0;32mСохранить\033[0m", "\033[0;31mНазад\033[0m"};
 		options = options_data;
 		break;
 
 	case Drop: // Раздел сброса данных
 		printf("Вы уверены, что хотите сбросить данные? Отменить изменения невозможно!\n\n");
 		menu_size = 2;
-		static char* options_drop[] = { "\033[1;34mНазад\033[0m", "\033[1;31mСбросить\033[0m" };
+		static char* options_drop[] = { "\033[0;34mНазад\033[0m", "\033[0;31mСбросить\033[0m" };
 		options = options_drop;
 		break;
 
@@ -100,7 +100,7 @@ void menu(int select, enum Menu page) { // Функция меню
 			printf("По вашему запросу студентов не найдено!\n\n");
 		printf("Выберите столбец для поиска:\n\n");
 		menu_size = 8;
-		static char* options_find[] = { "ID", "Имя", "Группа", "Модуль 1", "Модуль 2", "Рейтинг\n", "\033[1;37mСортировать\033[0m", "\033[1;31mНазад\033[0m" };
+		static char* options_find[] = { "ID", "Имя", "Группа", "Модуль 1", "Модуль 2", "Рейтинг\n", "\033[0;37mСортировать\033[0m", "\033[0;31mНазад\033[0m" };
 		options = options_find;
 		break;
 	}
@@ -108,7 +108,7 @@ void menu(int select, enum Menu page) { // Функция меню
 	
 	for (int i = 0; i < menu_size; i++) { // Вывод пунктов меню
 		if (i == select)
-			printf("\033[1;32m->\033[1;34m %s\033[0m\n", options[i]);
+			printf("\033[0;32m->\033[0;34m %s\033[0m\n", options[i]);
 		else
 			printf("\033[0;90m   %s\033[0m\n", options[i]);
 	}
@@ -181,7 +181,7 @@ void del_menu() { // Меню удаления данных
 				break;
 			case 6:
 				load_success = load_data();
-				count_deleted -= deleted;
+				count_deleted = 0;
 				break;
 			case 7:
 				save_success = save_data();
@@ -293,6 +293,9 @@ void start_menu() { // Меню главный экран
 					save_success = save_data();
 					break;
 				case 3:
+					load_success = load_data();
+					break;
+				case 4:
 					exit_menu();
 					break;
 			}
@@ -378,7 +381,7 @@ void edit_menu() { // Меню изменения данных
 	Student* person;
 	while (1) { // Получение ID и всяческие проверки
 		system("cls");
-		printf("\033[1;34mДля изменения информации о студенте введите его ID \033[0m\n");
+		printf("\033[0;34mДля изменения информации о студенте введите его ID \033[0m\n");
 		system("pause");
 		person = find_to_edit();
 		if (person == NULL) {
