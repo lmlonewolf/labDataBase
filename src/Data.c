@@ -62,7 +62,7 @@ List* sum_lists(List* first, List* second) { // Суммируем списки
 
 
 void drop_data(List* data) { // Сьрасываем данные по указателю, попутно очищая Кучу
-	if (data)
+	if (data && data->size > 1)
 		free(data->arr);
 	else
 		data = calloc(1, sizeof(List));
