@@ -9,9 +9,9 @@ void menu(int select, enum Menu page) { // Функция меню
 	switch (page) { // Выбор раздела меню
 	case Del: // Раздел удаления данных
 		if (save_success == 1)
-			printf("\n\033[0;31mОшибка сохранения!\033[0m\n");
+			printf("\033[0;31mОшибка сохранения!\033[0m\n\n");
 		else if (save_success == 0)
-			printf("\n\033[0;32mУспешно сохранено!\033[0m\n");
+			printf("\033[0;32mУспешно сохранено!\033[0m\n\n");
 		if (count_deleted == 0)
 			printf("\033[0;31mВы сегодня ещё никого не отчислили( Надо поднажать!\033[0m\n");
 		else if (count_deleted % 10 == 1)
