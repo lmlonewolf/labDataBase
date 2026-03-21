@@ -1,7 +1,6 @@
 #include "Header.h"
 #include <locale.h>
 
-// проверки?
 
 // Определение и инициализация глобальных переменных
 int menu_size = 0;
