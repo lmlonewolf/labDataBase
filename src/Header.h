@@ -67,8 +67,8 @@ Student* find_to_edit(void);
 
 
 // Функции вывода
-void print_List(List* persons);
-void print_Person(Student* person);
+void print_List(const List* const persons);
+void print_Person(const Student* const person);
 
 
 // Функции именения полей
