@@ -80,5 +80,5 @@ void edit_Rate(Student* person, int flag) { // Изменить рейтинг
 
 
 void init_group(Student* person) { // Инициализация строки с названием группы и структуры группы
-	snprintf(person->groupstr, sizeof(person->groupstr), "%s-%d-%s%d", person->group.name, person->group.year, (person->group.number / 10 == 0) ? "0" : "", person->group.number);
+	snprintf(person->groupstr, sizeof(person->groupstr), "%s-%s%d-%s%d", person->group.name, (person->group.year / 10 == 0) ? "0" : "", person->group.year, (person->group.number / 10 == 0) ? "0" : "", person->group.number);
 }
